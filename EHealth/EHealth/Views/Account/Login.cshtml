@@ -1,0 +1,68 @@
+﻿@using EHealth.BusinessLogic.Models;
+@Styles.Render("~/Content/css")
+<link href="~/Content/semantic.min.css" rel="stylesheet" />
+<link href="~/Content/button.min.css" rel="stylesheet" />
+<link href="~/Content/pages/login.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
+@{
+    Layout = null;
+}
+
+<div id="login-page">
+
+    <div class="background-img-container">
+        <img class="background-img" src="~/Content/img/background/awodibu2.jpg" />
+        <div class="green-img"></div>
+
+        <div class="button-tabs-container">
+            <div class="tab1 m-tab">LOG IN</div>
+            <div class="tab2 m-tab">REGISTER</div>
+        </div>
+    </div>
+    <div id="login-tabs">
+        <div id="tabs-1">
+            @Html.Partial("~/Views/Account/Main/_Login.cshtml", new LoginModel())
+
+        </div>
+        <div id="tabs-2" style="display: none">
+            @Html.Partial("~/Views/Account/Main/_Register.cshtml", new EHealth.Models.RegisterViewModel())
+
+        </div>
+    </div>
+</div>
+
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/modernizr")
+
+<script src="~/Scripts/knockout-3.5.0.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.tab1').click();
+    })
+
+    $('.tab1').click(function () {
+        $('#tabs-1').show();
+        $('.tab1').css('background-color', 'white');
+        $('.tab1').css('color', '#1250A3');
+
+        $('#tabs-2').hide();
+        $('.tab2').css('background-color', '');
+        $('.tab2').css('color', 'white');
+    });
+
+    $('.tab2').click(function () {
+        $('#tabs-2').show();
+        $('.tab2').css('background-color', 'white');
+        $('.tab2').css('color', '#1250A3');
+
+        $('#tabs-1').hide();
+        $('.tab1').css('background-color', '');
+        $('.tab1').css('color', 'white');
+    });
+</script>

@@ -1,0 +1,44 @@
+﻿.app-logo {
+    display: block;
+}
+
+.login-container {
+    background: #f5f7f9;
+    border-radius: 2px;
+    padding-top: 10px;
+    margin-top: 43px;
+    padding: 0 30px;
+    text-align: center;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+}
+
+    .login-container .form-control {
+        margin-bottom: 20px;
+        display: inline-block;
+        border-radius: 0;
+    }
+
+    .login-container input[type=button] {
+        background: #1275b7;
+        width: 332px;
+        height: 40px;
+        align-items: center;
+        font-size: 18px;
+        font-family: ProximaNova-Bold;
+        color: white;
+        margin-bottom: 38px !important;
+        margin-top: 10px !important;
+        border: none !important;
+    }
+
+.entity-column {
+    width: 100% !important;
+}
+
+.entity-container .entity-column .row-entry .field-validation-error span {
+    bottom: 0 !important;
+}
+

@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHealth", "EHealth\EHealth.csproj", "{C649BBA8-E2D9-42C4-94D5-A8296ACA3336}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataLayer", "DataLayer", "{9C09CD65-5794-4079-8628-48CD02D764C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLogic", "BusinessLogic", "{7797EF09-9C28-4D47-94A2-38D14534A458}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer.EHealth", "..\DataLayer.EHealth\DataLayer.EHealth.csproj", "{3840458C-78C3-41BD-982F-2CE1D3B76043}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHealth.BusinessLogic", "EHealth.BusinessLogic\EHealth.BusinessLogic.csproj", "{C29C16D6-7644-4EFE-9476-D66FF9AD066B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CustomMebership", "CustomMebership", "{A6BF7958-9B30-4D5E-8162-626B550C8EE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomMembership", "CustomMembership\CustomMembership.csproj", "{668D7B14-35F7-4DBB-8D87-0881CABC4D41}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C649BBA8-E2D9-42C4-94D5-A8296ACA3336}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C649BBA8-E2D9-42C4-94D5-A8296ACA3336}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C649BBA8-E2D9-42C4-94D5-A8296ACA3336}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C649BBA8-E2D9-42C4-94D5-A8296ACA3336}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3840458C-78C3-41BD-982F-2CE1D3B76043}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3840458C-78C3-41BD-982F-2CE1D3B76043}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3840458C-78C3-41BD-982F-2CE1D3B76043}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3840458C-78C3-41BD-982F-2CE1D3B76043}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C29C16D6-7644-4EFE-9476-D66FF9AD066B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C29C16D6-7644-4EFE-9476-D66FF9AD066B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C29C16D6-7644-4EFE-9476-D66FF9AD066B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C29C16D6-7644-4EFE-9476-D66FF9AD066B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{668D7B14-35F7-4DBB-8D87-0881CABC4D41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{668D7B14-35F7-4DBB-8D87-0881CABC4D41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{668D7B14-35F7-4DBB-8D87-0881CABC4D41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{668D7B14-35F7-4DBB-8D87-0881CABC4D41}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3840458C-78C3-41BD-982F-2CE1D3B76043} = {9C09CD65-5794-4079-8628-48CD02D764C2}
+		{C29C16D6-7644-4EFE-9476-D66FF9AD066B} = {7797EF09-9C28-4D47-94A2-38D14534A458}
+		{668D7B14-35F7-4DBB-8D87-0881CABC4D41} = {A6BF7958-9B30-4D5E-8162-626B550C8EE9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {174DD329-993A-4027-8281-7F6BE80C7C72}
+	EndGlobalSection
+EndGlobal

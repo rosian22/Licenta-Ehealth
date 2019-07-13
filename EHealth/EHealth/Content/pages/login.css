@@ -1,0 +1,96 @@
+﻿body {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+.background-img-container {
+    width: 100%;
+    position: relative;
+    height: 40%;
+}
+
+    .background-img-container .background-img {
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        opacity: 0.2;
+        position: absolute;
+        top: 0px;
+    }
+
+    .background-img-container .green-img {
+        background-color: #137D7C;
+        width: 100%;
+        height: 100%;
+        opacity: 0.5;
+        position: absolute;
+        top: 0px;
+    }
+
+#login-tabs {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    float: left;
+    clear: left;
+    margin-top: 40px;
+}
+
+.button-tabs-container {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.tab1 {
+    float: left;
+    margin-right: 0px;
+    margin-left: 34%;
+}
+
+.tab2 {
+    float: left;
+}
+
+.m-tab {
+    padding: 20px;
+    text-align: center;
+    width: 300px;
+    font-size: 20px;
+    font-weight: bold;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    cursor: pointer;
+}
+
+.login-container {
+    margin: 0 auto;
+    padding: 20px;
+    width: 30%;
+}
+
+.actions-container {
+    margin-top: 20px;
+}
+
+.remeber-me {
+    float: left;
+}
+
+.remeber-me-label {
+    color: #3268B0 !important;
+    font-size: 17px !important;
+}
+
+.forgot-password {
+    color: #3268B0;
+    float: right;
+    margin-top: 15px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+    .forgot-password:hover {
+        border-bottom: 1px solid #3268B0;
+    }
+

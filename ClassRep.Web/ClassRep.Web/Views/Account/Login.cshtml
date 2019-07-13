@@ -1,0 +1,51 @@
+﻿@model Cube.Mlm.Models.LoginViewModel
+@{
+    Layout = "../Shared/_LayoutLogin.cshtml";
+}
+
+<div class="entity-container login-container">
+    <div class="app-logo margin-top-20">
+        <img src="@Url.Content("/images/logo-blue.png")" />
+    </div>
+    <form id="login-form" class="form-horizontal margin-top-20">
+        @Html.ValidationSummary(true, "", new
+        {
+            @class = "text-danger"
+        })
+        <div class="entity-column">
+            <div class="row-entry">
+                @Html.TextBoxFor(m => m.Email, new
+                {
+                    @class = "form-control",
+                    @placeholder = "Email",
+                    @id = "LoginEmail"
+                })
+                @Html.ValidationMessageFor(m => m.Email, "", new
+                {
+                    @class = "text-danger"
+                })
+            </div>
+            <div class="row-entry">
+                @Html.PasswordFor(m => m.Password, new
+                {
+                    @placeholder = "Password",
+                    @class = "form-control",
+
+                })
+                @Html.ValidationMessageFor(m => m.Password, "", new
+                {
+                    @class = "text-danger",
+                })
+            </div>
+            <div class="margin-top-30">
+                <input type="button" id="send-input" class="login-button" value="SIGN IN" onclick="loginModule.performLogin();" />
+            </div>
+            <div class="margin-top-10 margin-bottom-10">
+                <a href="javascript:void(0);" class="forgot-password"
+                   onclick="loginModule.openForgotPassword();">Forgot Password</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+

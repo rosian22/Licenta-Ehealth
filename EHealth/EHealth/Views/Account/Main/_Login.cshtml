@@ -1,0 +1,40 @@
+﻿@using EHealth.BusinessLogic.Models;
+@model LoginModel
+
+@{
+    Layout = null;
+}
+
+<div class="login-container">
+    <div class="form-container">
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row-entry">
+                <label class="entry-label">Email</label>
+                <div class="ui input fluid entry-input">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id = "email-input"})
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row-entry">
+                <label class="entry-label">Password</label>
+                <div class="ui input fluid entry-input">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @id = "password-input" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row-entry actions-container">
+                <div class="ui toggle checkbox remeber-me">
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    <label class="remeber-me-label">Remember me</label>
+                </div>
+                <div class="forgot-password">
+                    Forgot password?
+                </div>
+            </div>
+            <button type="submit" class="ui fluid button green register-button">Log In</button>
+        }
+    </div>
+</div>
