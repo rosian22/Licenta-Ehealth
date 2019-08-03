@@ -70,46 +70,29 @@ namespace EHealth.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public virtual async Task<JsonResult> Login(LoginViewModel model, string returnUrl)
         {
+            var response = ResponseFactory.CreateResponse<StringWrapper>(false, (int)ResponseCode.ErrorAnErrorOccurred);
+
             if (!ModelState.IsValid)
             {
                 return Json(ResponseFactory.ErrorReponse);
             }
 
-            try
+            //var result = await CheckUserCredentials(model.Email, model.Password, model.RememberMe).ConfigureAwait(false);
+            //if (result)
+            //{
+            //    return Json(ResponseFactory.CreateResponse<StringWrapper>(true, (int)ResponseCode.Success));
+            //}
+
+            SignInStatus result = SignInStatus.Failure;
+            result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+            if(result != SignInStatus.Failure)
             {
-                var applicationUser = await CheckEmailAndPassword(model.Email, model.Password).ConfigureAwait(false);
-                if (applicationUser == null)
-                {
-                    return Json(ResponseFactory.ErrorReponse);
-                }
-
-                var userType = UserType.INVALID;
-
-                var user = await AspNetUserCore.GetAsync(applicationUser.Id);
-                if (user == null)
-                {
-                    return Json(ResponseFactory.ErrorReponse);
-
-                }
-
-                userType = UserType.ADMIN;
-                if (userType == UserType.INVALID)
-                {
-                    return Json(ResponseFactory.ErrorReponse);
-                }
-
-                CreateCookie(applicationUser.UserName, applicationUser.Id);
-
-                
-                return RedirectToAction("Index", "Home");
+                response = ResponseFactory.Success<StringWrapper>((int)ResponseCode.Success);
             }
-            catch (Exception ex)
-            {
-                return Json(ResponseFactory.ErrorReponse);
-            }
+
+            return Json(response);
         }
 
         protected async Task<ApplicationUser> CheckEmailAndPassword(string email, string password)
@@ -144,6 +127,32 @@ namespace EHealth.Controllers
             Response.Cookies.Add(cookie);
         }
 
+        protected async Task<bool> CheckUserCredentials(string email, string password, bool rememberMe)
+        {
+            try
+            {
+                var applicationUser = await CheckEmailAndPassword(email, password).ConfigureAwait(false);
+                if (applicationUser == null)
+                {
+                    return false;
+                }
+
+                //var roleIdList = Whitelabel.GetAdminRole();
+
+                //var isUserApproved = await AspNetUserCore.IsUserIdAuthorizedAsync(applicationUser.Id, roleIdList).ConfigureAwait(false);
+                //if (!isUserApproved)
+                //{
+                //    return false;
+                //}
+
+                CreateCookie(applicationUser.UserName, applicationUser.Id);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
         //
         // GET: /Account/VerifyCode
@@ -205,7 +214,12 @@ namespace EHealth.Controllers
         {
             if (ModelState.IsValid)
             {
-                var aspNetUser = new ApplicationUser { Id = Guid.NewGuid().ToString(), UserName = model.Email, Email = model.Email };
+                var aspNetUser = new ApplicationUser {
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = model.Email,
+                    Email = model.Email,
+                    SecurityStamp = Guid.NewGuid().ToString()
+                };
                 IdentityResult result = null;
                 try
                 {

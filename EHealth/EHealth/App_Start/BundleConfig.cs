@@ -25,6 +25,18 @@ namespace EHealth
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/semantic-component").Include(
+                      "~/Scripts/semantic.min.js",
+                      "~/Scripts/popup.min.js"
+                      ));
+
+            bundles.Add(new StyleBundle("~/Content/semantic-component").Include(
+                      "~/Content/semantic.min.css",
+                      "~/Content/popup.min.css",
+                      "~/Content/menu.min.css"));
+
         }
     }
 }

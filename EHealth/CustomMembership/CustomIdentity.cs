@@ -1,6 +1,4 @@
 ﻿using EHealth.BusinessLogic.Models;
-using System;
-using System.Collections.Generic;
 using System.Security.Principal;
 
 namespace CustomMembership

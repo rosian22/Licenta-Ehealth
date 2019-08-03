@@ -5,41 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/semantic-component")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link href="~/Content/menu-slider.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <div class="ui stackable menu navbar">
+
+        <i class="bars icon big bar-icon" onclick="openNav()"></i>
+
+        <div id="mySidenav" class="sidenav left-menu">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            @* ADD HERE ITEMS IN MENU *@
+            <div class="profile-details">
+                <div class="profile-picture-container">
+
+                </div>
+                <span>@User.Identity.Name</span>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+
+
+            @Html.Partial("_LoginPartial")
+        </div>
+
+        <div class="item home-icon">
+            <img src="~/Content/img/logo/logo1.png">
         </div>
     </div>
+
     <div class="container body-content">
+        <div class="ui segment loading-container" style="display: none;">
+            <p></p>
+            <div class="ui active dimmer">
+                <div class="ui loader huge"></div>
+            </div>
+        </div>
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        <footer class="footer"></footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/semantic-component")
+    <script src="~/Scripts/loader.js"></script>
+    <script src="~/Scripts/ajaxHelper.js"></script>
     <script src="~/Scripts/knockout-3.5.0.js"></script>
     @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        /* Set the width of the side navigation to 250px */
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        /* Set the width of the side navigation to 0 */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
 </body>
 </html>

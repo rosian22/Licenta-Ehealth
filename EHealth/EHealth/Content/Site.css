@@ -1,4 +1,7 @@
 ﻿
+body {
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -48,4 +51,52 @@ textarea {
 
 .form-control {
     height: 40px;
+}
+
+.loading-container {
+    position: absolute !important;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+footer, .navbar {
+    background-color: #262266 !important;
+    color: white !important;
+}
+
+
+footer {
+    position: absolute !important;
+    bottom: 0px !important;
+    left: 0px;
+    right: 0px;
+    height: 60px;
+}
+
+.navbar {
+    width: 100%;
+    border-radius: 0 !important;
+    height: 55px;
+}
+
+.home-icon {
+    position: absolute !important;
+    left: 50%;
+    right: 50%;
+    top: 5px;
+}
+
+.navbar .bar-icon {
+    margin: auto 10px;
+}
+
+.bar-icon{
+    cursor: pointer;
+}
+
+.left-menu {
 }

@@ -4,37 +4,119 @@
 @{
     Layout = null;
 }
+@Styles.Render("~/Content/semantic-component")
 
+<style>
+    body {
+        overflow: hidden;
+    }
+</style>
+<link href="~/Content/Site.css" rel="stylesheet" />
 <div class="login-container">
+    <div class="ui segment loading-container" style="display: none;">
+        <p></p>
+        <div class="ui active dimmer">
+            <div class="ui loader huge"></div>
+        </div>
+    </div>
     <div class="form-container">
-        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form" }))
-        {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <form action="#" id="loginForm">
             <div class="row-entry">
                 <label class="entry-label">Email</label>
                 <div class="ui input fluid entry-input">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id = "email-input"})
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id = "email-input-login" })
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="row-entry">
                 <label class="entry-label">Password</label>
                 <div class="ui input fluid entry-input">
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @id = "password-input" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @id = "password-input-login" })
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="row-entry actions-container">
                 <div class="ui toggle checkbox remeber-me">
-                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.CheckBoxFor(m => m.RememberMe, new { @id = "remember-input-login" })
                     <label class="remeber-me-label">Remember me</label>
                 </div>
                 <div class="forgot-password">
                     Forgot password?
                 </div>
             </div>
-            <button type="submit" class="ui fluid button green register-button">Log In</button>
-        }
+            <button class="ui fluid button green login-button" onclick="performLogin()">Log In</button>
+        </form>
     </div>
 </div>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/ajaxHelper.js"></script>
+<script src="~/Scripts/loader.js"></script>
+<script src="~/Scripts/Utils.js"></script>
+@Scripts.Render("~/bundles/semantic-component")
+
+<script type="text/javascript">
+
+    $('#loginForm').on('submit', function (event) {
+        event.preventDefault();
+    });
+
+    function performLogin() {
+        var $form = $($("form")[0]);
+
+        if (!$form.valid()) {
+            return;
+        }
+
+        showLoading();
+        ajaxHelper.post(
+            "/Account/Login",
+            {
+                Email: $("#email-input-login").val(),
+                Password: $("#password-input-login").val(),
+                RememberMe: $('#remember-input-login').val()
+            },
+            function (result) {
+                debugger;
+                if (result !== null && result.Success !== undefined && result.Success) {
+                    //toastrModule.showSuccess("You logged in successfully!");
+                    alert("You logged in successfully!");
+                    setTimeout(function () {
+                        if (typeof (Storage) !== "undefined") {
+                            localStorage.setItem("email", $("#email-input").val());
+                            localStorage.setItem("password", $("#password-input").val());
+                        }
+
+                        var returnUrl = getUrlParam("ReturnUrl");
+                        if (returnUrl === undefined || returnUrl === null)
+                            returnUrl = "/Home/Index";
+
+                        window.location = returnUrl;
+                        hideLoading();
+                    }, 1500);
+                    return;
+                }
+                //toastrModule.showError("Failed to authenticate, please try again!");
+                //$("#loading").hide();
+                alert("Failed to authenticate, please try again!");
+                hideLoading();
+            },
+            function () {
+                debugger;
+                //toastrModule.showError("An error occurred, please try again!");
+                hideLoading();
+            });
+    }
+
+    $('#password-input-login').on('keydown', function (e) {
+        if (e.which == 13) {
+            e.preventDefault();
+
+            if ($('#loginForm').valid() === false)
+                return false;
+
+            performLogin();
+        }
+    });
+
+</script>
