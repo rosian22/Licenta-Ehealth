@@ -1,5 +1,230 @@
-﻿.index-page-container{
+﻿.index-page-container {
     float: left;
     width: 100%;
     height: 100%;
+}
+
+.user-details {
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.profile-picture-container {
+    float: left;
+    clear: left;
+    width: 300px;
+    height: 420px;
+    margin-bottom: 10px;
+    border: 1px solid red;
+}
+
+.details-container {
+    float: left;
+    clear: left;
+    width: 300px;
+}
+
+.daily-goal {
+    margin-top: 20px;
+}
+
+.user-birthday {
+    float: right;
+}
+
+
+.user-body-container {
+    float: left;
+    clear: left;
+    width: 100%;
+    height: 200px;
+}
+
+.body-card {
+    float: left;
+    margin-left: 20px;
+    width: calc(25% - 25px);
+    height: calc(100% - 40px);
+    margin-top: 20px;
+    text-align: center;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2);
+    border: solid 1px #1250a3;
+    background-color: #ffffff;
+}
+
+@media screen and (max-height: 817px) {
+    .user-body-container {
+        height: 24% !important;
+    }
+
+    .info-label {
+        left: 28% !important;
+    }
+
+    .daily-cards {
+        height: 57vh !important;
+        width: calc(32% - 13px) !important;
+    }
+}
+
+@media screen and (min-height: 880px) {
+    .user-body-container {
+        height: 30% !important;
+    }
+
+    .info-label {
+        left: 35% !important;
+    }
+
+    .daily-cards {
+        height: 46vh !important;
+        width: calc(32% - 10px);
+    }
+}
+
+.user-details .ui.progress .bar {
+    background: rgb(13,97,191);
+    background: -moz-linear-gradient(90deg, rgba(13,97,191,1) 0%, rgba(18,18,96,1) 0%, rgba(12,179,115,1) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(13,97,191,1) 0%, rgba(18,18,96,1) 0%, rgba(12,179,115,1) 100%);
+    background: linear-gradient(90deg, rgba(13,97,191,1) 0%, rgba(18,18,96,1) 0%, rgba(12,179,115,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0d61bf",endColorstr="#0cb373",GradientType=1);
+}
+
+.statistic-table-container {
+    float: left;
+    width: calc(100% - 394px);
+    margin-left: 50px;
+    margin-top: 20px;
+    height: 536px;
+}
+
+    .statistic-table-container .ui.top.attached.tabular.menu.statistics-table {
+        background: rgb(2,0,36);
+        background: -moz-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(18,18,96,1) 0%, rgba(5,110,131,1) 100%);
+        background: -webkit-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(18,18,96,1) 0%, rgba(5,110,131,1) 100%);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(18,18,96,1) 0%, rgba(5,110,131,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#056e83",GradientType=1);
+    }
+
+    .statistic-table-container a.item {
+        color: white !important;
+    }
+
+        .statistic-table-container a.item.active {
+            color: #0e3e80 !important;
+        }
+
+.common-text {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: normal;
+    text-align: left;
+    color: #1250a3;
+}
+
+.counter {
+    position: absolute;
+    top: 60%;
+    left: 46%;
+    font-size: 60px;
+}
+
+.info-label {
+    position: absolute;
+    top: 20%;
+    left: 35%;
+}
+
+.calories-burned .info-label {
+}
+
+.body-weight .info-label {
+}
+
+.goals-achived .info-label {
+}
+
+.achivements .info-label {
+}
+
+.calories-burned .counter {
+    left: 46%;
+}
+
+.body-weight .counter {
+    left: 43%;
+}
+
+.goals-achived .counter {
+    left: 45%;
+}
+
+.achivements .counter {
+    left: 45%;
+}
+
+.daily-cards {
+    float: left;
+    margin-left: 20px;
+    width: calc(32% - 10px);
+    height: 46vh;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+.card-header {
+    float: left;
+    width: 100%;
+    height: 50px;
+    color: #04eba4;
+    background-color: #262266;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+
+    .card-header .label-text {
+        float: left;
+        margin-left: 20px;
+        font-size: 18px;
+    }
+
+    .card-header .label-date {
+        float: right;
+        margin-right: 20px;
+        font-size: 14px;
+        color: white;
+    }
+
+    .card-header .text {
+        margin-top: 15px;
+    }
+
+.ui.bottom.attached.tab.segment {
+    float: left !important;
+}
+
+.min-counter {
+    text-align: center;
+    float: left;
+    width: 100%;
+    margin-top: 40px;
+    height: 170px;
+}
+
+.daily-progress{
+    float: left;
+    width: 100%;
+    padding: 20px;
+}
+
+.value {
+    color: #04eba4 !important;
+}
+
+.bar .progress {
+    color: white;
 }

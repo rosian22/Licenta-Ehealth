@@ -1,9 +1,192 @@
 ﻿
-
-
+<link href="~/Content/pages/homeIndex.css" rel="stylesheet" />
 
 <div class="index-page-container">
 
-</div>
+    <div class="user-details">
+        <div class="profile-picture-container">
 
-<script type="text/javascript"></script>
+        </div>
+        <div class="details-container">
+            <span class="user-name">Johanna DOE</span>
+            <span class="user-birthday">23/04/1993</span>
+            <div class="daily-goal">
+                <label>Daily Goal</label>
+                <div class="ui progress" id="daily-goal-progress-bar">
+                    <div class="bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="statistic-table-container">
+        <div class="ui top attached tabular menu statistics-table">
+            <a class="item active" data-tab="first">Activity time</a>
+            <a class="item" data-tab="second">Exercises</a>
+            <a class="item" data-tab="third">Alimentation</a>
+            <a class="item" data-tab="fourth">Sleep</a>
+        </div>
+        <div class="ui bottom attached tab segment active" data-tab="first">
+            <div class="daily-cards">
+                <div class="card-header">
+                    <label class="text label-text">Daily</label>
+                    <label class="text label-date">23/04/2019</label>
+                </div>
+                <div class="min-counter">
+                    <div class="ui statistic">
+                        <div class="value">
+                            0
+                        </div>
+                        <div class="label">
+                            MIN
+                        </div>
+                    </div>
+                </div>
+                <div class="daily-progress">
+                    <div class="ui active progress" id="first-part">
+                        <div class="bar">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="label">First Part Of The Day</div>
+                    </div>
+                    <div class="ui active progress" id="second-part">
+                        <div class="bar">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="label">Second Part Of The Day</div>
+                    </div>
+                    <div class="ui active progress" id="third-part">
+                        <div class="bar">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="label">Last Part Of The Day</div>
+                    </div>
+                </div>
+            </div>
+            <div class="daily-cards">
+                <div class="card-header">
+                    <label class="text label-text">Daily</label>
+                    <label class="text label-date">23/04/2019</label>
+                </div>
+                <div class="min-counter">
+                    <div class="ui statistic">
+                        <div class="value">
+                            0
+                        </div>
+                        <div class="label">
+                            MIN
+                        </div>
+                    </div>
+                </div>
+                <div class="daily-progress">
+                    <div class="ui active progress" id="first-part">
+                        <div class="bar">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="label">First Part Of The Day</div>
+                    </div>
+                    <div class="ui active progress" id="second-part">
+                        <div class="bar">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="label">Second Part Of The Day</div>
+                    </div>
+                    <div class="ui active progress" id="third-part">
+                        <div class="bar">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="label">Last Part Of The Day</div>
+                    </div>
+                </div>
+            </div>
+            <div class="daily-cards">
+                <div class="card-header">
+                    <label class="text label-text">Daily</label>
+                    <label class="text label-date">23/04/2019</label>
+                </div>
+                <div class="min-counter">
+                    <div class="ui statistic">
+                        <div class="value">
+                            0
+                        </div>
+                        <div class="label">
+                            MIN
+                        </div>
+                    </div>
+                </div>
+                <div class="daily-progress">
+                    <div class="ui active progress" id="first-part">
+                        <div class="bar">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="label">First Part Of The Day</div>
+                    </div>
+                    <div class="ui active progress" id="second-part">
+                        <div class="bar">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="label">Second Part Of The Day</div>
+                    </div>
+                    <div class="ui active progress" id="third-part">
+                        <div class="bar">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="label">Last Part Of The Day</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui bottom attached tab segment" data-tab="second">
+            Exercises
+        </div>
+        <div class="ui bottom attached tab segment" data-tab="third">
+            Alimentation
+        </div>
+        <div class="ui bottom attached tab segment" data-tab="fourth">
+            Sleep
+        </div>
+    </div>
+
+    <div class="user-body-container">
+        <div class="body-weight body-card">
+            <label class="info-label common-text">
+                Body Weight
+            </label>            
+            <span class="counter common-text">0</span>
+        </div>
+        <div class="calories-burned body-card">
+            <label class="info-label common-text">
+                Calories Burned
+            </label>
+            <span class="counter common-text">0</span>
+        </div>
+        <div class="goals-achived body-card">
+            <label class="info-label common-text">
+                Goals Achieved
+            </label>
+            <span class="counter common-text">0</span>
+        </div>
+        <div class="achivements body-card">
+            <label class="info-label common-text">
+                Achievements
+            </label>
+            <span class="counter common-text">0</span>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('.daily-preogress .progress').progress({
+                precent: 40
+            });
+            $('#daily-goal-progress-bar').progress();
+            $('.statistics-table .item').tab();
+        });
+
+    </script>
+}

@@ -1,11 +1,6 @@
 ﻿
 body {
-}
-
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    min-height: 100%;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -70,13 +65,16 @@ textarea {
 
 
 footer {
-    position: absolute !important;
-    bottom: 0px !important;
-    left: 0px;
-    right: 0px;
     height: 60px;
+    color: white;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    background-position: 0% 0%;
+    position: fixed;
+    bottom: 0pt;
+    left: 0pt;
+    width: 100%;
     background-color: #3C46CF !important;
-    color: white !important;
 }
 
 .navbar {
@@ -119,7 +117,7 @@ footer {
         height: 125px;
     }
 
-    .left-menu .action-buttons a{
+    .left-menu .action-buttons a {
         margin: 20px 5px;
         float: left;
         font-size: 20px;
@@ -148,7 +146,7 @@ footer {
     border-radius: 13px;
 }
 
-.account-icon{
+.account-icon {
     float: left;
     margin-left: 30px !important;
 }
@@ -157,4 +155,37 @@ footer {
     float: left;
     margin-left: 10px;
     margin-top: 10px;
+}
+
+.body-content {
+    float: left;
+    border: 1px solid red;
+    width: 100%;
+    height: 100%;
+}
+
+.ui.stackable.menu.navbar {
+    margin-bottom: 0px;
+}
+
+@media screen and (max-height: 817px) {
+    .footer {
+        display: none;
+        transition: all 2s linear;
+    }
+}
+
+@media only screen and (min-height: 818px) {
+    .footer {
+        display: block;
+        transition: all 2s linear;
+    }
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
 }

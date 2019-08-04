@@ -35,6 +35,7 @@ namespace EHealth
             bundles.Add(new StyleBundle("~/Content/semantic-component").Include(
                       "~/Content/semantic.min.css",
                       "~/Content/popup.min.css",
+                      "~/Content/progress.min.css",
                       "~/Content/menu.min.css"));
 
         }
