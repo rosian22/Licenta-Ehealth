@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using CustomMembership
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -12,7 +13,15 @@
 <body>
     <div class="ui stackable menu navbar">
 
-        <i class="bars icon big bar-icon" onclick="openNav()"></i>
+        <div class="account-icon" onclick="openNav()">
+            <div class="nav-profile-picture">
+
+            </div>
+            <div class="menu-trigger">
+                <span class="nav-user-name">@User.Identity.Name</span>
+                <i class="angle large down icon"></i>
+            </div>
+        </div>
 
         <div id="mySidenav" class="sidenav left-menu">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -21,11 +30,15 @@
                 <div class="profile-picture-container">
 
                 </div>
-                <span>@User.Identity.Name</span>
+                <span class="user-name">@User.Identity.Name</span>
+            </div>
+            <div class="action-buttons">
+                @Html.ActionLink("User List", "Index", "Home")
+                @Html.ActionLink("Friend List", "Index", "Home")
+                @Html.ActionLink("Contacts", "Index", "Home")
+                @Html.Partial("_LoginPartial")
             </div>
 
-
-            @Html.Partial("_LoginPartial")
         </div>
 
         <div class="item home-icon">

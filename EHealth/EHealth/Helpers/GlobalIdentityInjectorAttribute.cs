@@ -1,11 +1,11 @@
 ﻿using CustomMembership;
+using DataLayer.EHealth;
 using EHealth.BusinessLogic.Models.Cores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Http.Filters;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -47,7 +47,7 @@ namespace EHealth.Helpers
                 {
                 }
 
-                SetPrincipal(filterContext, validationToken);
+                 SetPrincipal(filterContext, validationToken);
 
                 FormsAuthentication.RenewTicketIfOld(authTicket);
             }
@@ -60,36 +60,34 @@ namespace EHealth.Helpers
 
         #region Private methods
 
-        private static async Task SetPrincipal(AuthorizationContext filterContext, string validationToken)
+        private static void SetPrincipal(AuthorizationContext filterContext, string validationToken)
         {
-            await SetIdentity(filterContext, validationToken).ConfigureAwait(false);
+            SetIdentity(filterContext, validationToken);
         }
 
-        private static async Task SetIdentity(AuthorizationContext filterContext, string validationToken)
+        private static void SetIdentity(AuthorizationContext filterContext, string validationToken)
         {
-            var user = await AspNetUserCore.GetAsync(validationToken).ConfigureAwait(false);
+            var user = UserCore.GetSingle(usr => usr.AspNetUserId == validationToken, new[] { nameof(User.AspNetUser)});
             if (user == null)
             {
                 return;
             }
 
-            var identity = new CustomIdentity();
-
-            identity.AspNetUserId = validationToken;
-            identity.Username = user.Email;
-            identity.Name = user.;
-            identity.Status = user.AspNetUser.Status;
-            identity.Id = user.Id;
-            identity.ProfileImageUrl = null;
-            identity.NotificationsCount = NotificationCore.Count(n => n.TriggeredByUserId == identity.Id);
-            identity.WhiteLabelId = whitelabel.Id;
-            identity.UserType = user.UserType;
-            identity.FullName = user.FullName;
+            var identity = new CustomIdentity
+            {
+                AspNetUserId = validationToken,
+                Username = user.AspNetUser.Email,
+                Status = user.AspNetUser.Status ?? user.AspNetUser.Status.Value,
+                Id = user.Id,
+                ProfilePictureUrl = user.ProfilePictureUrl,
+                UserType = user.AspNetUser.UserType ?? user.AspNetUser.UserType.Value,
+                FullName = user.FullName
+            };
 
             SetIdentity(filterContext, identity, user.AspNetUser);
         }
 
-        private static void SetIdentity(AuthorizationContext filterContext, CustomIdentity identity, DataLayer.AspNetUser user)
+        private static void SetIdentity(AuthorizationContext filterContext, CustomIdentity identity, AspNetUser user)
         {
             var newUser = new CustomPrincipal(identity)
             {
@@ -98,6 +96,8 @@ namespace EHealth.Helpers
 
             filterContext.HttpContext.User = newUser;
         }
+
+     
 
         #endregion
     }

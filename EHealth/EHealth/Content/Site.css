@@ -63,8 +63,8 @@ textarea {
     width: 100%;
 }
 
-footer, .navbar {
-    background-color: #262266 !important;
+.navbar {
+    background-color: #05064D !important;
     color: white !important;
 }
 
@@ -75,6 +75,8 @@ footer {
     left: 0px;
     right: 0px;
     height: 60px;
+    background-color: #3C46CF !important;
+    color: white !important;
 }
 
 .navbar {
@@ -90,13 +92,69 @@ footer {
     top: 5px;
 }
 
-.navbar .bar-icon {
+.navbar .account-icon {
     margin: auto 10px;
 }
 
-.bar-icon{
+.account-icon {
     cursor: pointer;
 }
 
 .left-menu {
+    background: rgba(72,83,234,1);
+    background: -moz-linear-gradient(45deg, rgba(72,83,234,1) 0%, rgba(64,74,215,1) 10%, rgba(34,39,144,1) 47%, rgba(5,6,77,1) 82%);
+    background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(72,83,234,1)), color-stop(10%, rgba(64,74,215,1)), color-stop(47%, rgba(34,39,144,1)), color-stop(82%, rgba(5,6,77,1)));
+    background: -webkit-linear-gradient(45deg, rgba(72,83,234,1) 0%, rgba(64,74,215,1) 10%, rgba(34,39,144,1) 47%, rgba(5,6,77,1) 82%);
+    background: -o-linear-gradient(45deg, rgba(72,83,234,1) 0%, rgba(64,74,215,1) 10%, rgba(34,39,144,1) 47%, rgba(5,6,77,1) 82%);
+    background: -ms-linear-gradient(45deg, rgba(72,83,234,1) 0%, rgba(64,74,215,1) 10%, rgba(34,39,144,1) 47%, rgba(5,6,77,1) 82%);
+    background: linear-gradient(45deg, rgba(72,83,234,1) 0%, rgba(64,74,215,1) 10%, rgba(34,39,144,1) 47%, rgba(5,6,77,1) 82%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4853ea', endColorstr='#05064d', GradientType=1 );
+}
+
+    .left-menu .profile-picture-container {
+        border: 1px solid red;
+        float: left;
+        width: 130px;
+        margin-left: 63px;
+        height: 125px;
+    }
+
+    .left-menu .action-buttons a{
+        margin: 20px 5px;
+        float: left;
+        font-size: 20px;
+    }
+
+    .left-menu .profile-details {
+        float: left;
+        width: 100%;
+    }
+
+        .left-menu .profile-details .user-name {
+            margin-left: 63px;
+            float: left;
+            clear: left;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+
+.nav-profile-picture {
+    float: left;
+    border: 1px solid red;
+    width: 45px;
+    height: 45px;
+    border-radius: 13px;
+}
+
+.account-icon{
+    float: left;
+    margin-left: 30px !important;
+}
+
+.menu-trigger {
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
 }

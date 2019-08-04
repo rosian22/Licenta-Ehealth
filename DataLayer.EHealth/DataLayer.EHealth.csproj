@@ -174,10 +174,15 @@
     <Compile Include="Interfaces\IStoredPreocedure.cs" />
     <Compile Include="Models\EntityStatus.cs" />
     <Compile Include="Partials\AspNetRole.partial.cs" />
+    <Compile Include="Partials\User.partial.cs" />
     <Compile Include="Partials\AspNetUser.partial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AspNetRoleRepository.cs" />
     <Compile Include="Repositories\AspNetUserRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="User.cs">
+      <DependentUpon>DBModels.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="DBModels.edmx">

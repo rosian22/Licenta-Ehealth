@@ -1,4 +1,5 @@
 ﻿using EHealth.BusinessLogic.Models;
+using System;
 using System.Security.Principal;
 
 namespace CustomMembership
@@ -26,6 +27,12 @@ namespace CustomMembership
         public int Status { get; set; }
 
         public int UserType { get; set; }
+
+        public Guid Id { get; set; }
+
+        public string ProfilePictureUrl { get; set; }
+
+        public string FullName { get; set; }
 
         #endregion
 

@@ -8,6 +8,8 @@
         <EntityTypeShape EntityType="EHealthModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2" />
         <EntityTypeShape EntityType="EHealthModel.AspNetUser" Width="1.5" PointX="3" PointY="1" />
         <AssociationConnector Association="EHealthModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="EHealthModel.User" Width="1.5" PointX="5.25" PointY="2" />
+        <AssociationConnector Association="EHealthModel.FK_User_AspNetUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

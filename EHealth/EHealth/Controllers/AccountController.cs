@@ -79,18 +79,18 @@ namespace EHealth.Controllers
                 return Json(ResponseFactory.ErrorReponse);
             }
 
-            //var result = await CheckUserCredentials(model.Email, model.Password, model.RememberMe).ConfigureAwait(false);
-            //if (result)
-            //{
-            //    return Json(ResponseFactory.CreateResponse<StringWrapper>(true, (int)ResponseCode.Success));
-            //}
-
-            SignInStatus result = SignInStatus.Failure;
-            result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
-            if(result != SignInStatus.Failure)
+            var result = await CheckUserCredentials(model.Email, model.Password, model.RememberMe).ConfigureAwait(false);
+            if (result)
             {
-                response = ResponseFactory.Success<StringWrapper>((int)ResponseCode.Success);
+                return Json(ResponseFactory.CreateResponse<StringWrapper>(true, (int)ResponseCode.Success));
             }
+
+            //SignInStatus result = SignInStatus.Failure;
+            //result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+            //if(result != SignInStatus.Failure)
+            //{
+            //    response = ResponseFactory.Success<StringWrapper>((int)ResponseCode.Success);
+            //}
 
             return Json(response);
         }

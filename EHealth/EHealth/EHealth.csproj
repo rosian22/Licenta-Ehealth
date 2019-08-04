@@ -193,6 +193,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\GlobalIdentityInjectorAttribute.cs" />
     <Compile Include="Migrations\201907132117502_Mih.cs" />
     <Compile Include="Migrations\201907132117502_Mih.Designer.cs">
       <DependentUpon>201907132117502_Mih.cs</DependentUpon>
@@ -217,6 +218,7 @@
     <Content Include="Content\menu-slider.css" />
     <Content Include="Content\menu.css" />
     <Content Include="Content\menu.min.css" />
+    <Content Include="Content\pages\homeIndex.css" />
     <Content Include="Content\pages\login.css" />
     <Content Include="Content\popup.css" />
     <Content Include="Content\popup.min.css" />

@@ -5,11 +5,11 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "logout-form" }))
     {
         @Html.AntiForgeryToken()
 
-        @Html.ActionLink("Hello " + name + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        @Html.ActionLink("Account Settings", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
     }
 }

@@ -164,6 +164,7 @@
     <Compile Include="Models\BaseCores\BaseSinglePkNameCore.cs" />
     <Compile Include="Models\BaseCores\BaseSinglePkNameStatusCore.cs" />
     <Compile Include="Models\Cores\AspNetRoleCore.cs" />
+    <Compile Include="Models\Cores\UserCore.cs" />
     <Compile Include="Models\Cores\AspNetUserCore.cs" />
     <Compile Include="Models\CreateUserModel.cs" />
     <Compile Include="Models\LogInModel.cs" />
