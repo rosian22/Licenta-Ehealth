@@ -20,6 +20,7 @@ namespace DataLayer.EHealth
         public string LastName { get; set; }
         public string FullName { get; set; }
         public string ProfilePictureUrl { get; set; }
+        public Nullable<System.DateTime> BirthDay { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
     }

@@ -53,6 +53,7 @@ warning 6002: The table/view 'EHealth.dbo.User' does not have a primary key defi
           <Property Name="LastName" Type="nvarchar" MaxLength="250" />
           <Property Name="FullName" Type="nvarchar" MaxLength="250" />
           <Property Name="ProfilePictureUrl" Type="nvarchar" MaxLength="550" />
+          <Property Name="BirthDay" Type="date" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
@@ -105,7 +106,8 @@ warning 6002: The table/view 'EHealth.dbo.User' does not have a primary key defi
     [User].[FirstName] AS [FirstName], 
     [User].[LastName] AS [LastName], 
     [User].[FullName] AS [FullName], 
-    [User].[ProfilePictureUrl] AS [ProfilePictureUrl]
+    [User].[ProfilePictureUrl] AS [ProfilePictureUrl], 
+    [User].[BirthDay] AS [BirthDay]
     FROM [dbo].[User] AS [User]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
@@ -184,6 +186,7 @@ warning 6002: The table/view 'EHealth.dbo.User' does not have a primary key defi
           <Property Name="FullName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="ProfilePictureUrl" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="EHealthModel.FK_User_AspNetUsers" FromRole="User" ToRole="AspNetUser" />
+          <Property Name="BirthDay" Type="DateTime" Precision="0" />
         </EntityType>
         <Association Name="FK_User_AspNetUsers">
           <End Type="EHealthModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
@@ -243,6 +246,7 @@ warning 6002: The table/view 'EHealth.dbo.User' does not have a primary key defi
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="EHealthModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
                 <ScalarProperty Name="ProfilePictureUrl" ColumnName="ProfilePictureUrl" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />

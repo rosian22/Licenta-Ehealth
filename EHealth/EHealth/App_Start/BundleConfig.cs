@@ -36,6 +36,7 @@ namespace EHealth
                       "~/Content/semantic.min.css",
                       "~/Content/popup.min.css",
                       "~/Content/progress.min.css",
+                      "~/Content/message.min.css",
                       "~/Content/menu.min.css"));
 
         }

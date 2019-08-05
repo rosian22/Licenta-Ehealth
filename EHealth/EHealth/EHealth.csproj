@@ -190,6 +190,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -358,6 +359,8 @@
     <Content Include="Content\menu-slider.css" />
     <Content Include="Content\menu.css" />
     <Content Include="Content\menu.min.css" />
+    <Content Include="Content\message.css" />
+    <Content Include="Content\message.min.css" />
     <Content Include="Content\pages\homeIndex.css" />
     <Content Include="Content\pages\login.css" />
     <Content Include="Content\popup.css" />
@@ -408,6 +411,7 @@
     <Content Include="Scripts\knockout-3.5.0.js" />
     <Content Include="Scripts\loader.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\pages\HomeIndexViewModel.js" />
     <Content Include="Scripts\pages\modules\loginModule.js" />
     <Content Include="Scripts\popup.js" />
     <Content Include="Scripts\popup.min.js" />

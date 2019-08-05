@@ -1,12 +1,15 @@
-﻿using System;
+﻿using EHealth.BusinessLogic.Models;
+using EHealth.BusinessLogic.Models.Cores;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace EHealth.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : GenericBaseController
     {
         public ActionResult Index()
         {
@@ -26,5 +29,6 @@ namespace EHealth.Controllers
 
             return View();
         }
+
     }
 }
