@@ -1,0 +1,61 @@
+﻿#food-page-container {
+    border: 1px solid red;
+    margin: 20px;
+    height: calc(100% - 80px);
+}
+
+.food-container {
+    border: 1px solid orange;
+    height: 100%;
+    width: 100%;
+    margin-top: 20px;
+    float: left;
+    clear: left;
+}
+
+.food-item {
+    border: 1px solid black;
+    float: left;
+    margin: 20px;
+    width: 300px;
+    height: 320px;
+}
+
+.filter-header {
+    float: left;
+    width: 100%;
+    padding: 20px;
+}
+
+    .filter-header label, input {
+        float: left;
+        clear: left;
+    }
+
+.food-header {
+    border: 1px solid blue;
+    float: left;
+    width: 100%;
+    height: 50px;
+    padding: 20px;
+    text-align: center;
+}
+
+.food-picture-container {
+    float: left;
+    height: calc(100% - 50px);
+    padding: 5px;
+}
+
+.food-picture {
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+
+.ui.modal:not(.compact) {
+    width: calc(70% - 50px) !important;
+    margin-left: 25px !important;
+    height: calc(100% - 50px) !important;
+    margin-top: 25px !important;
+}

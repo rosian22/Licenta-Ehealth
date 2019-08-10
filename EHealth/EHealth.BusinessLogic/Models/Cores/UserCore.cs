@@ -11,7 +11,7 @@ using UpWorky.BusinessLogic.ModelCore.Base;
 
 namespace EHealth.BusinessLogic.Models.Cores
 {
-    public partial class UserCore : BaseSinglePkCore<UserRepository, User>
+    public class UserCore : BaseSinglePkCore<UserRepository, User>
     {
         public static async Task<UserViewModel> GetUserData(string aspNetUserId)
         {

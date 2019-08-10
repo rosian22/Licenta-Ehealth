@@ -12,27 +12,20 @@ namespace DataLayer.EHealth
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class MuscleGroup
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public MuscleGroup()
         {
-            this.Trainings = new HashSet<Training>();
-            this.Recipes = new HashSet<Recipe>();
+            this.Exercises = new HashSet<Exercise>();
         }
     
         public System.Guid Id { get; set; }
-        public string AspNetUserId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string FullName { get; set; }
-        public string ProfilePictureUrl { get; set; }
-        public Nullable<System.DateTime> BirthDay { get; set; }
+        public string PictureUrl { get; set; }
+        public string Description { get; set; }
+        public string VideoUrl { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Training> Trainings { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Recipe> Recipes { get; set; }
+        public virtual ICollection<Exercise> Exercises { get; set; }
     }
 }

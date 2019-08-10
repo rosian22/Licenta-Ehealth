@@ -40,12 +40,74 @@
           <Property Name="Status" Type="int" />
           <Property Name="CreatedAt" Type="date" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'EHealth.dbo.User' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Exercise">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MuscleGroupId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Food">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="550" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Calories" Type="float" />
+          <Property Name="Carbohidrates" Type="float" />
+          <Property Name="Sugar" Type="float" />
+          <Property Name="Fiber" Type="float" />
+          <Property Name="Fats" Type="float" />
+          <Property Name="Proteins" Type="float" />
+          <Property Name="PictureUrl" Type="nvarchar" MaxLength="550" />
+          <Property Name="Grams" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="MuscleGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PictureUrl" Type="nvarchar" MaxLength="550" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="550" Nullable="false" />
+          <Property Name="VideoUrl" Type="nvarchar" MaxLength="550" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recipe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar" MaxLength="550" />
+        </EntityType>
+        <EntityType Name="RecipeFoodAssignment">
+          <Key>
+            <PropertyRef Name="RecipeId" />
+            <PropertyRef Name="FoodId" />
+          </Key>
+          <Property Name="RecipeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FoodId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Training">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Duration" Type="nvarchar" MaxLength="550" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrainingExerciseAssignment">
+          <Key>
+            <PropertyRef Name="TrainingId" />
+            <PropertyRef Name="ExerciseId" />
+          </Key>
+          <Property Name="TrainingId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ExerciseId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="AspNetUserId" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="AspNetUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
@@ -54,6 +116,22 @@ warning 6002: The table/view 'EHealth.dbo.User' does not have a primary key defi
           <Property Name="FullName" Type="nvarchar" MaxLength="250" />
           <Property Name="ProfilePictureUrl" Type="nvarchar" MaxLength="550" />
           <Property Name="BirthDay" Type="date" />
+        </EntityType>
+        <EntityType Name="UserRecipeAssignment">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RecipeId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RecipeId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserTrainingAssignment">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="TrainingId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TrainingId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
@@ -83,6 +161,66 @@ warning 6002: The table/view 'EHealth.dbo.User' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Exercise_MuscleGroup">
+          <End Role="MuscleGroup" Type="Self.MuscleGroup" Multiplicity="1" />
+          <End Role="Exercise" Type="Self.Exercise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MuscleGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Exercise">
+              <PropertyRef Name="MuscleGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecipeFoodAssignment_Food">
+          <End Role="Food" Type="Self.Food" Multiplicity="1" />
+          <End Role="RecipeFoodAssignment" Type="Self.RecipeFoodAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Food">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecipeFoodAssignment">
+              <PropertyRef Name="FoodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecipeFoodAssignment_Recipe">
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+          <End Role="RecipeFoodAssignment" Type="Self.RecipeFoodAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecipeFoodAssignment">
+              <PropertyRef Name="RecipeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrainingExerciseAssignment_Exercise">
+          <End Role="Exercise" Type="Self.Exercise" Multiplicity="1" />
+          <End Role="TrainingExerciseAssignment" Type="Self.TrainingExerciseAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exercise">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TrainingExerciseAssignment">
+              <PropertyRef Name="ExerciseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrainingExerciseAssignment_Training">
+          <End Role="Training" Type="Self.Training" Multiplicity="1" />
+          <End Role="TrainingExerciseAssignment" Type="Self.TrainingExerciseAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Training">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TrainingExerciseAssignment">
+              <PropertyRef Name="TrainingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -95,21 +233,68 @@ warning 6002: The table/view 'EHealth.dbo.User' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserRecipeAssignment_Recipe">
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+          <End Role="UserRecipeAssignment" Type="Self.UserRecipeAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRecipeAssignment">
+              <PropertyRef Name="RecipeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRecipeAssignment_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserRecipeAssignment" Type="Self.UserRecipeAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRecipeAssignment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTrainingAssignment_Training">
+          <End Role="Training" Type="Self.Training" Multiplicity="1" />
+          <End Role="UserTrainingAssignment" Type="Self.UserTrainingAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Training">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserTrainingAssignment">
+              <PropertyRef Name="TrainingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTrainingAssignment_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserTrainingAssignment" Type="Self.UserTrainingAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserTrainingAssignment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="EHealthModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="User" EntityType="Self.User" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [User].[Id] AS [Id], 
-    [User].[AspNetUserId] AS [AspNetUserId], 
-    [User].[FirstName] AS [FirstName], 
-    [User].[LastName] AS [LastName], 
-    [User].[FullName] AS [FullName], 
-    [User].[ProfilePictureUrl] AS [ProfilePictureUrl], 
-    [User].[BirthDay] AS [BirthDay]
-    FROM [dbo].[User] AS [User]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Exercise" EntityType="Self.Exercise" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Food" EntityType="Self.Food" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MuscleGroup" EntityType="Self.MuscleGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecipeFoodAssignment" EntityType="Self.RecipeFoodAssignment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Training" EntityType="Self.Training" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrainingExerciseAssignment" EntityType="Self.TrainingExerciseAssignment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRecipeAssignment" EntityType="Self.UserRecipeAssignment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTrainingAssignment" EntityType="Self.UserTrainingAssignment" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
@@ -118,9 +303,45 @@ warning 6002: The table/view 'EHealth.dbo.User' does not have a primary key defi
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Exercise_MuscleGroup" Association="Self.FK_Exercise_MuscleGroup">
+            <End Role="MuscleGroup" EntitySet="MuscleGroup" />
+            <End Role="Exercise" EntitySet="Exercise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecipeFoodAssignment_Food" Association="Self.FK_RecipeFoodAssignment_Food">
+            <End Role="Food" EntitySet="Food" />
+            <End Role="RecipeFoodAssignment" EntitySet="RecipeFoodAssignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecipeFoodAssignment_Recipe" Association="Self.FK_RecipeFoodAssignment_Recipe">
+            <End Role="Recipe" EntitySet="Recipe" />
+            <End Role="RecipeFoodAssignment" EntitySet="RecipeFoodAssignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrainingExerciseAssignment_Exercise" Association="Self.FK_TrainingExerciseAssignment_Exercise">
+            <End Role="Exercise" EntitySet="Exercise" />
+            <End Role="TrainingExerciseAssignment" EntitySet="TrainingExerciseAssignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrainingExerciseAssignment_Training" Association="Self.FK_TrainingExerciseAssignment_Training">
+            <End Role="Training" EntitySet="Training" />
+            <End Role="TrainingExerciseAssignment" EntitySet="TrainingExerciseAssignment" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_AspNetUsers" Association="Self.FK_User_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRecipeAssignment_Recipe" Association="Self.FK_UserRecipeAssignment_Recipe">
+            <End Role="Recipe" EntitySet="Recipe" />
+            <End Role="UserRecipeAssignment" EntitySet="UserRecipeAssignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRecipeAssignment_User" Association="Self.FK_UserRecipeAssignment_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRecipeAssignment" EntitySet="UserRecipeAssignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTrainingAssignment_Training" Association="Self.FK_UserTrainingAssignment_Training">
+            <End Role="Training" EntitySet="Training" />
+            <End Role="UserTrainingAssignment" EntitySet="UserTrainingAssignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTrainingAssignment_User" Association="Self.FK_UserTrainingAssignment_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserTrainingAssignment" EntitySet="UserTrainingAssignment" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -130,13 +351,38 @@ warning 6002: The table/view 'EHealth.dbo.User' does not have a primary key defi
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AspNetRoles" EntityType="EHealthModel.AspNetRole" />
           <EntitySet Name="AspNetUsers" EntityType="EHealthModel.AspNetUser" />
+          <EntitySet Name="Exercises" EntityType="EHealthModel.Exercise" />
+          <EntitySet Name="Foods" EntityType="EHealthModel.Food" />
+          <EntitySet Name="MuscleGroups" EntityType="EHealthModel.MuscleGroup" />
+          <EntitySet Name="Recipes" EntityType="EHealthModel.Recipe" />
+          <EntitySet Name="Trainings" EntityType="EHealthModel.Training" />
+          <EntitySet Name="Users" EntityType="EHealthModel.User" />
+          <AssociationSet Name="FK_User_AspNetUsers" Association="EHealthModel.FK_User_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Exercise_MuscleGroup" Association="EHealthModel.FK_Exercise_MuscleGroup">
+            <End Role="MuscleGroup" EntitySet="MuscleGroups" />
+            <End Role="Exercise" EntitySet="Exercises" />
+          </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="EHealthModel.AspNetUserRoles">
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <EntitySet Name="Users" EntityType="EHealthModel.User" />
-          <AssociationSet Name="FK_User_AspNetUsers" Association="EHealthModel.FK_User_AspNetUsers">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          <AssociationSet Name="RecipeFoodAssignment" Association="EHealthModel.RecipeFoodAssignment">
+            <End Role="Food" EntitySet="Foods" />
+            <End Role="Recipe" EntitySet="Recipes" />
+          </AssociationSet>
+          <AssociationSet Name="TrainingExerciseAssignment" Association="EHealthModel.TrainingExerciseAssignment">
+            <End Role="Exercise" EntitySet="Exercises" />
+            <End Role="Training" EntitySet="Trainings" />
+          </AssociationSet>
+          <AssociationSet Name="UserTrainingAssignment" Association="EHealthModel.UserTrainingAssignment">
+            <End Role="Training" EntitySet="Trainings" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="UserRecipeAssignment" Association="EHealthModel.UserRecipeAssignment">
+            <End Role="Recipe" EntitySet="Recipes" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
@@ -144,8 +390,8 @@ warning 6002: The table/view 'EHealth.dbo.User' does not have a primary key defi
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Name" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" Type="String" />
           <NavigationProperty Name="AspNetUsers" Relationship="EHealthModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUser">
@@ -164,20 +410,72 @@ warning 6002: The table/view 'EHealth.dbo.User' does not have a primary key defi
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetRoles" Relationship="EHealthModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
           <Property Name="UserType" Type="Int32" />
           <Property Name="Status" Type="Int32" />
           <Property Name="CreatedAt" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Users" Relationship="EHealthModel.FK_User_AspNetUsers" FromRole="AspNetUser" ToRole="User" />
+          <NavigationProperty Name="AspNetRoles" Relationship="EHealthModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
         </EntityType>
-        <Association Name="AspNetUserRoles">
-          <End Type="EHealthModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
-          <End Type="EHealthModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
-        </Association>
+        <EntityType Name="Exercise">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="MuscleGroupId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="MuscleGroup" Relationship="EHealthModel.FK_Exercise_MuscleGroup" FromRole="Exercise" ToRole="MuscleGroup" />
+          <NavigationProperty Name="Trainings" Relationship="EHealthModel.TrainingExerciseAssignment" FromRole="Exercise" ToRole="Training" />
+        </EntityType>
+        <EntityType Name="Food">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Calories" Type="Double" />
+          <Property Name="Carbohidrates" Type="Double" />
+          <Property Name="Sugar" Type="Double" />
+          <Property Name="Fiber" Type="Double" />
+          <Property Name="Fats" Type="Double" />
+          <Property Name="Proteins" Type="Double" />
+          <Property Name="PictureUrl" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="Grams" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Recipes" Relationship="EHealthModel.RecipeFoodAssignment" FromRole="Food" ToRole="Recipe" />
+          <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MuscleGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PictureUrl" Type="String" Nullable="false" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="VideoUrl" Type="String" Nullable="false" MaxLength="550" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Exercises" Relationship="EHealthModel.FK_Exercise_MuscleGroup" FromRole="MuscleGroup" ToRole="Exercise" />
+        </EntityType>
+        <EntityType Name="Recipe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Foods" Relationship="EHealthModel.RecipeFoodAssignment" FromRole="Recipe" ToRole="Food" />
+          <NavigationProperty Name="Users" Relationship="EHealthModel.UserRecipeAssignment" FromRole="Recipe" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Training">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Duration" Type="String" Nullable="false" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Exercises" Relationship="EHealthModel.TrainingExerciseAssignment" FromRole="Training" ToRole="Exercise" />
+          <NavigationProperty Name="Users" Relationship="EHealthModel.UserTrainingAssignment" FromRole="Training" ToRole="User" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="AspNetUserId" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="AspNetUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
@@ -185,8 +483,10 @@ warning 6002: The table/view 'EHealth.dbo.User' does not have a primary key defi
           <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="FullName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="ProfilePictureUrl" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="EHealthModel.FK_User_AspNetUsers" FromRole="User" ToRole="AspNetUser" />
           <Property Name="BirthDay" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="AspNetUser" Relationship="EHealthModel.FK_User_AspNetUsers" FromRole="User" ToRole="AspNetUser" />
+          <NavigationProperty Name="Trainings" Relationship="EHealthModel.UserTrainingAssignment" FromRole="User" ToRole="Training" />
+          <NavigationProperty Name="Recipes" Relationship="EHealthModel.UserRecipeAssignment" FromRole="User" ToRole="Recipe" />
         </EntityType>
         <Association Name="FK_User_AspNetUsers">
           <End Type="EHealthModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
@@ -199,6 +499,38 @@ warning 6002: The table/view 'EHealth.dbo.User' does not have a primary key defi
               <PropertyRef Name="AspNetUserId" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Exercise_MuscleGroup">
+          <End Type="EHealthModel.MuscleGroup" Role="MuscleGroup" Multiplicity="1" />
+          <End Type="EHealthModel.Exercise" Role="Exercise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MuscleGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Exercise">
+              <PropertyRef Name="MuscleGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="EHealthModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="EHealthModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+        <Association Name="RecipeFoodAssignment">
+          <End Type="EHealthModel.Food" Role="Food" Multiplicity="*" />
+          <End Type="EHealthModel.Recipe" Role="Recipe" Multiplicity="*" />
+        </Association>
+        <Association Name="TrainingExerciseAssignment">
+          <End Type="EHealthModel.Exercise" Role="Exercise" Multiplicity="*" />
+          <End Type="EHealthModel.Training" Role="Training" Multiplicity="*" />
+        </Association>
+        <Association Name="UserTrainingAssignment">
+          <End Type="EHealthModel.Training" Role="Training" Multiplicity="*" />
+          <End Type="EHealthModel.User" Role="User" Multiplicity="*" />
+        </Association>
+        <Association Name="UserRecipeAssignment">
+          <End Type="EHealthModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <End Type="EHealthModel.User" Role="User" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -235,14 +567,60 @@ warning 6002: The table/view 'EHealth.dbo.User' does not have a primary key defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="EHealthModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetUser">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-            <EndProperty Name="AspNetRole">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-          </AssociationSetMapping>
+          <EntitySetMapping Name="Exercises">
+            <EntityTypeMapping TypeName="EHealthModel.Exercise">
+              <MappingFragment StoreEntitySet="Exercise">
+                <ScalarProperty Name="MuscleGroupId" ColumnName="MuscleGroupId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Foods">
+            <EntityTypeMapping TypeName="EHealthModel.Food">
+              <MappingFragment StoreEntitySet="Food">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Grams" ColumnName="Grams" />
+                <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
+                <ScalarProperty Name="Proteins" ColumnName="Proteins" />
+                <ScalarProperty Name="Fats" ColumnName="Fats" />
+                <ScalarProperty Name="Fiber" ColumnName="Fiber" />
+                <ScalarProperty Name="Sugar" ColumnName="Sugar" />
+                <ScalarProperty Name="Carbohidrates" ColumnName="Carbohidrates" />
+                <ScalarProperty Name="Calories" ColumnName="Calories" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MuscleGroups">
+            <EntityTypeMapping TypeName="EHealthModel.MuscleGroup">
+              <MappingFragment StoreEntitySet="MuscleGroup">
+                <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recipes">
+            <EntityTypeMapping TypeName="EHealthModel.Recipe">
+              <MappingFragment StoreEntitySet="Recipe">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trainings">
+            <EntityTypeMapping TypeName="EHealthModel.Training">
+              <MappingFragment StoreEntitySet="Training">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="EHealthModel.User">
               <MappingFragment StoreEntitySet="User">
@@ -256,6 +634,46 @@ warning 6002: The table/view 'EHealth.dbo.User' does not have a primary key defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="EHealthModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="RecipeFoodAssignment" TypeName="EHealthModel.RecipeFoodAssignment" StoreEntitySet="RecipeFoodAssignment">
+            <EndProperty Name="Recipe">
+              <ScalarProperty Name="Id" ColumnName="RecipeId" />
+            </EndProperty>
+            <EndProperty Name="Food">
+              <ScalarProperty Name="Id" ColumnName="FoodId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="TrainingExerciseAssignment" TypeName="EHealthModel.TrainingExerciseAssignment" StoreEntitySet="TrainingExerciseAssignment">
+            <EndProperty Name="Training">
+              <ScalarProperty Name="Id" ColumnName="TrainingId" />
+            </EndProperty>
+            <EndProperty Name="Exercise">
+              <ScalarProperty Name="Id" ColumnName="ExerciseId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UserTrainingAssignment" TypeName="EHealthModel.UserTrainingAssignment" StoreEntitySet="UserTrainingAssignment">
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="Training">
+              <ScalarProperty Name="Id" ColumnName="TrainingId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UserRecipeAssignment" TypeName="EHealthModel.UserRecipeAssignment" StoreEntitySet="UserRecipeAssignment">
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="Recipe">
+              <ScalarProperty Name="Id" ColumnName="RecipeId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

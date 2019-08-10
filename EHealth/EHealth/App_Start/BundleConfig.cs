@@ -29,7 +29,8 @@ namespace EHealth
 
             bundles.Add(new ScriptBundle("~/bundles/semantic-component").Include(
                       "~/Scripts/semantic.min.js",
-                      "~/Scripts/popup.min.js"
+                      "~/Scripts/popup.min.js",
+                      "~/Scripts/modal.min.js"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/semantic-component").Include(
@@ -37,6 +38,7 @@ namespace EHealth
                       "~/Content/popup.min.css",
                       "~/Content/progress.min.css",
                       "~/Content/message.min.css",
+                      "~/Content/modal.min.css",
                       "~/Content/menu.min.css"));
 
         }

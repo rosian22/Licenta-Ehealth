@@ -49,6 +49,9 @@
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\EHealth\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\EHealth\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Data.Edm, Version=5.8.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\EHealth\packages\Microsoft.Data.Edm.5.8.4\lib\net40\Microsoft.Data.Edm.dll</HintPath>
     </Reference>
@@ -82,8 +85,11 @@
     <Reference Include="Microsoft.Spatial, Version=7.5.4.30215, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\EHealth\packages\Microsoft.Spatial.7.5.4\lib\portable-net45+win8+wpa81\Microsoft.Spatial.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\EHealth\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=9.3.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\EHealth\packages\WindowsAzure.Storage.9.3.3\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\EHealth\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="OdataToEntity, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\EHealth\packages\OdataToEntity.2.3.1\lib\net461\OdataToEntity.dll</HintPath>
@@ -164,7 +170,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModels.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Exercise.cs">
+      <DependentUpon>DBModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\QuerableExtensions.cs" />
+    <Compile Include="Food.cs">
+      <DependentUpon>DBModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\IContext.cs" />
     <Compile Include="Interfaces\IDataAccessObject.cs" />
     <Compile Include="Interfaces\IDataAccessObjectWithName.cs" />
@@ -173,13 +185,24 @@
     <Compile Include="Interfaces\ISinglePkDataAccessObject.cs" />
     <Compile Include="Interfaces\IStoredPreocedure.cs" />
     <Compile Include="Models\EntityStatus.cs" />
+    <Compile Include="MuscleGroup.cs">
+      <DependentUpon>DBModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Partials\AspNetRole.partial.cs" />
+    <Compile Include="Partials\Food.partial.cs" />
     <Compile Include="Partials\User.partial.cs" />
     <Compile Include="Partials\AspNetUser.partial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recipe.cs">
+      <DependentUpon>DBModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\AspNetRoleRepository.cs" />
     <Compile Include="Repositories\AspNetUserRepository.cs" />
+    <Compile Include="Repositories\FoodRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Training.cs">
+      <DependentUpon>DBModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>

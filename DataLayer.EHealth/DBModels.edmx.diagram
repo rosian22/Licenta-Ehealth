@@ -4,12 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="26b973f810474fb788fc6e84ec5390ae" Name="Diagram1">
-        <EntityTypeShape EntityType="EHealthModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2" />
-        <EntityTypeShape EntityType="EHealthModel.AspNetUser" Width="1.5" PointX="3" PointY="1" />
-        <AssociationConnector Association="EHealthModel.AspNetUserRoles" />
-        <EntityTypeShape EntityType="EHealthModel.User" Width="1.5" PointX="5.25" PointY="2" />
+      <Diagram DiagramId="26b973f810474fb788fc6e84ec5390ae" Name="Diagram1" ZoomLevel="67">
+        <EntityTypeShape EntityType="EHealthModel.AspNetRole" PointX="14.875" PointY="1" Width="1.5" />
+        <EntityTypeShape EntityType="EHealthModel.AspNetUser" Width="1.5" PointX="13" PointY="1" />
+        <EntityTypeShape EntityType="EHealthModel.Exercise" Width="1.5" PointX="6" PointY="1.5" />
+        <EntityTypeShape EntityType="EHealthModel.Food" Width="1.5" PointX="5.875" PointY="3.875" />
+        <EntityTypeShape EntityType="EHealthModel.MuscleGroup" Width="1.5" PointX="3.75" PointY="1.375" />
+        <EntityTypeShape EntityType="EHealthModel.Recipe" Width="1.5" PointX="8.125" PointY="4" />
+        <EntityTypeShape EntityType="EHealthModel.Training" Width="1.5" PointX="8.25" PointY="1.375" />
+        <EntityTypeShape EntityType="EHealthModel.User" Width="1.5" PointX="10.5" PointY="1" />
         <AssociationConnector Association="EHealthModel.FK_User_AspNetUsers" />
+        <AssociationConnector Association="EHealthModel.FK_Exercise_MuscleGroup" />
+        <AssociationConnector Association="EHealthModel.AspNetUserRoles" />
+        <AssociationConnector Association="EHealthModel.RecipeFoodAssignment" />
+        <AssociationConnector Association="EHealthModel.TrainingExerciseAssignment" />
+        <AssociationConnector Association="EHealthModel.UserTrainingAssignment" />
+        <AssociationConnector Association="EHealthModel.UserRecipeAssignment" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

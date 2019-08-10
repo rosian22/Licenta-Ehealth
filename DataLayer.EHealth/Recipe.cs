@@ -12,27 +12,22 @@ namespace DataLayer.EHealth
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Recipe
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public Recipe()
         {
-            this.Trainings = new HashSet<Training>();
-            this.Recipes = new HashSet<Recipe>();
+            this.Foods = new HashSet<Food>();
+            this.Users = new HashSet<User>();
         }
     
         public System.Guid Id { get; set; }
-        public string AspNetUserId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string FullName { get; set; }
-        public string ProfilePictureUrl { get; set; }
-        public Nullable<System.DateTime> BirthDay { get; set; }
+        public string Description { get; set; }
+        public string Name { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Training> Trainings { get; set; }
+        public virtual ICollection<Food> Foods { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Recipe> Recipes { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

@@ -12,26 +12,27 @@ namespace DataLayer.EHealth
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Food
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public Food()
         {
-            this.Trainings = new HashSet<Training>();
             this.Recipes = new HashSet<Recipe>();
         }
     
         public System.Guid Id { get; set; }
-        public string AspNetUserId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string FullName { get; set; }
-        public string ProfilePictureUrl { get; set; }
-        public Nullable<System.DateTime> BirthDay { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public Nullable<double> Calories { get; set; }
+        public Nullable<double> Carbohidrates { get; set; }
+        public Nullable<double> Sugar { get; set; }
+        public Nullable<double> Fiber { get; set; }
+        public Nullable<double> Fats { get; set; }
+        public Nullable<double> Proteins { get; set; }
+        public string PictureUrl { get; set; }
+        public int Grams { get; set; }
+        public Nullable<int> Status { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Training> Trainings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Recipe> Recipes { get; set; }
     }

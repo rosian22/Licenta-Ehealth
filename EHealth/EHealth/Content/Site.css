@@ -1,6 +1,7 @@
 ﻿
 body {
     min-height: 100%;
+    overflow: hidden;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -87,7 +88,7 @@ footer {
     position: absolute !important;
     left: 50%;
     right: 50%;
-    top: 5px;
+    top: 2px;
 }
 
 .navbar .account-icon {
@@ -110,7 +111,6 @@ footer {
 }
 
     .left-menu .profile-picture-container {
-        border: 1px solid red;
         float: left;
         width: 130px;
         margin-left: 63px;
@@ -129,22 +129,13 @@ footer {
     }
 
         .left-menu .profile-details .user-name {
-            margin-left: 63px;
+            margin-left: 82px;
             float: left;
             clear: left;
             margin-top: 10px;
             margin-bottom: 20px;
             font-size: 16px;
         }
-
-
-.nav-profile-picture {
-    float: left;
-    border: 1px solid red;
-    width: 45px;
-    height: 45px;
-    border-radius: 13px;
-}
 
 .account-icon {
     float: left;
@@ -159,9 +150,9 @@ footer {
 
 .body-content {
     float: left;
-    border: 1px solid red;
     width: 100%;
     height: 100%;
+    overflow: scroll;
 }
 
 .ui.stackable.menu.navbar {
@@ -208,4 +199,41 @@ footer {
     right: 0px;
     width: 693px;
     z-index: 100;
+}
+
+.nav-profile-picture {
+    float: left;
+    width: 45px;
+    height: 45px;
+    border-radius: 13px;
+}
+
+    .nav-profile-picture .user-picture {
+        float: left;
+        width: 45px;
+        height: 45px;
+        border-radius: 13px;
+    }
+
+.profile-picture-container .user-picture {
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+
+.right-menu{
+  right: 0 !important;
+}
+
+.right-menu-icon {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    cursor: pointer;
+}
+
+.dimmed.dimmable > .ui.animating.dimmer, .dimmed.dimmable > .ui.visible.dimmer, .ui.active.dimmer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

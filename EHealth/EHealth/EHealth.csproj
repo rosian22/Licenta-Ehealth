@@ -51,9 +51,15 @@
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=9.3.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.Storage.9.3.3\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -186,6 +192,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FoodController.cs" />
     <Compile Include="Controllers\GenericBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -361,6 +368,8 @@
     <Content Include="Content\menu.min.css" />
     <Content Include="Content\message.css" />
     <Content Include="Content\message.min.css" />
+    <Content Include="Content\modal.min.css" />
+    <Content Include="Content\pages\food.css" />
     <Content Include="Content\pages\homeIndex.css" />
     <Content Include="Content\pages\login.css" />
     <Content Include="Content\popup.css" />
@@ -410,8 +419,10 @@
     <Content Include="Scripts\knockout-3.5.0.debug.js" />
     <Content Include="Scripts\knockout-3.5.0.js" />
     <Content Include="Scripts\loader.js" />
+    <Content Include="Scripts\modal.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\pages\HomeIndexViewModel.js" />
+    <Content Include="Scripts\pages\FoodViewModel.js" />
     <Content Include="Scripts\pages\modules\loginModule.js" />
     <Content Include="Scripts\popup.js" />
     <Content Include="Scripts\popup.min.js" />
@@ -458,6 +469,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Main\_Login.cshtml" />
     <Content Include="Views\Account\Main\_Register.cshtml" />
+    <Content Include="Views\Food\Index.cshtml" />
+    <Content Include="Views\Food\_CreateFood.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

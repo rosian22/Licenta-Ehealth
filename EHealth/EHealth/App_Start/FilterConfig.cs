@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using EHealth.Helpers;
+using System.Web;
 using System.Web.Mvc;
 
 namespace EHealth
@@ -7,7 +8,8 @@ namespace EHealth
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            //filters.Add(new HandleErrorAttribute());
+            filters.Add(new GlobalIdentityInjectorAttribute());
         }
     }
 }

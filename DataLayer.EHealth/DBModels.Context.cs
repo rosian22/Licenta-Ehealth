@@ -27,6 +27,11 @@ namespace DataLayer.EHealth
     
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<Exercise> Exercises { get; set; }
+        public virtual DbSet<Food> Foods { get; set; }
+        public virtual DbSet<MuscleGroup> MuscleGroups { get; set; }
+        public virtual DbSet<Recipe> Recipes { get; set; }
+        public virtual DbSet<Training> Trainings { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }

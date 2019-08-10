@@ -1,0 +1,46 @@
+﻿<link href="~/Content/pages/food.css" rel="stylesheet" />
+
+<div id="food-page-container">
+
+    <div class="filter-header">
+        <label>Name</label>
+        <input id="food-filter-name" type="text" placeholder="kiwi, humus, etc." />
+
+        <button class="ui button fluid" data-bind="click: ShowCreateModal">Create Food Item</button>
+    </div>
+    <div class="food-container" data-bind="foreach: FoodList">
+        <div class="food-item">
+            <div class="food-header">
+                <span class="food-name" data-bind="text: Name"></span>
+            </div>
+            <div class="food-picture-container">
+                <img class="food-picture" data-bind="attr:{src: PictureUrl}" />
+            </div>
+        </div>
+    </div>
+
+</div>
+@Html.Partial("~/Views/Food/_CreateFood.cshtml")
+@section Scripts{
+    <script src="~/Scripts/pages/FoodViewModel.js"></script>
+    <script type="text/javascript">
+
+        FoodVM = new FoodViewModel();
+        $(document).ready(function () {
+
+            $('.food-item-modal').modal({
+                blurring: true,
+                useFlex: true
+            });
+            FoodVM.Init();
+        });
+        ko.applyBindings(FoodVM, document.getElementById('food-page-container'));
+
+        $('#food-filter-name').on('keypress', function (e) {
+            if (e.which == 13) {
+                FoodVM.Filter($('#food-filter-name').val());
+            }
+        });
+
+    </script>
+}

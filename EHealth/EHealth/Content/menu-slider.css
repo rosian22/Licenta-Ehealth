@@ -1,5 +1,5 @@
 ﻿/* The side navigation menu */
-.sidenav {
+.sidenav-left {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
@@ -13,7 +13,7 @@
 }
 
     /* The navigation menu links */
-    .sidenav a {
+    .sidenav-left a {
         padding: 8px 8px 8px 32px;
         text-decoration: none;
         font-size: 25px;
@@ -23,12 +23,12 @@
     }
 
         /* When you mouse over the navigation links, change their color */
-        .sidenav a:hover {
+        .sidenav-left a:hover {
             color: #f1f1f1;
         }
 
     /* Position and style the close button (top right corner) */
-    .sidenav .closebtn {
+    .sidenav-left .closebtn {
         position: absolute;
         top: 15px;
         font-size: 36px;
@@ -44,11 +44,56 @@
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-    .sidenav {
+    .sidenav-left {
         padding-top: 15px;
     }
 
-        .sidenav a {
+        .sidenav-left a {
+            font-size: 18px;
+        }
+}
+
+
+.sidenav-right {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+    .sidenav-right a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+
+        .sidenav-right a:hover {
+            color: #f1f1f1;
+        }
+
+    .sidenav-right .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+@media screen and (max-height: 450px) {
+    .sidenav-right {
+        padding-top: 15px;
+    }
+
+        .sidenav-right a {
             font-size: 18px;
         }
 }
