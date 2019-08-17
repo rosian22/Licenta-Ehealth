@@ -23,7 +23,7 @@
             function (foodList) {
                 var updatedList = [];
                 foodList.forEach((food) => {
-                    updatedList.push(new Food(food));
+                    updatedList.push(new Food(food, self));
                 });
 
                 self.FoodList(updatedList);
@@ -37,21 +37,66 @@
     }
 
     self.ShowCreateModal = () => {
-        $('.food-item-modal').modal('show');
+        $('#create-food-modal').modal('show');
     }
 
     self.HideCreateModal = () => {
-        $('.food-item-modal').modal('hide');
+        $('#create-food-modal').modal('hide');
     }
 
 };
 
-var Food = function (raw) {
+var Food = function (raw, parent) {
     var self = this;
 
     self.Id = ko.observable(raw.Id);
     self.Name = ko.observable(raw.Name);
     self.PictureUrl = ko.observable(raw.PictureUrl);
+    self.Parent = parent;
+
+    self.Delete = () => {
+        ajaxHelper.post(
+            "/Food/Delete",
+            {
+                FoodId: self.Id()
+            },
+            function (response) {
+                if (response && response.Success) {
+                    showSuccess("Successfully deleted food item");
+                    self.Parent.Filter();
+                    return;
+                } else {
+                    showError();
+                }
+            },
+            function () {
+                showError();
+            }
+        );
+    }
+
+    self.ShowDetailsModal = () => {
+        ajaxHelper.get(
+            '/Food/GetFoodDetails',
+            {
+                foodId: self.Id()
+            },
+            function (response) {
+                if (response && response.Success) {
+                    var data = response.Data;
+                    CreateFoodVM.Init(data);
+                    $('.upload-style').css('opacity', 0);
+                    $('#create-food-modal').modal('show');
+                    return;
+                }
+
+                showError(`An error has ocurred while getting ${self.Name()} data`);
+            },
+            function () {
+                showError(`An error has ocurred while getting ${self.Name()} data`);
+            }
+        );
+    }
 };
 
 var FoodVM = null;

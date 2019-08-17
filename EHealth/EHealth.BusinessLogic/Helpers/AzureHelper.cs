@@ -12,7 +12,7 @@ namespace EHealth.BusinessLogic.Helpers
 {
     public class AzureHelper
     {
-        public static string UploadPicture(HttpPostedFileBase file, string name, Guid pictureName)
+        public static string Upload(HttpPostedFileBase file, string name, Guid pictureName)
         {
             CloudStorageAccount AzureStorage = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=ehealthlicenta;AccountKey=5KkH5yEILJX9oe4JEBMUDBRTgoC4Za4z5ywqyQ00x7Zvtsuyprat1F6d1ckDqUeuT+5tol4Z6TwdE2TRnJXVMQ==;EndpointSuffix=core.windows.net");
             CloudBlobClient BlobClient = AzureStorage.CreateCloudBlobClient();

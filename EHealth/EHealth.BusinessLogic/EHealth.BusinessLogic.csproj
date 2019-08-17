@@ -175,6 +175,7 @@
     <Compile Include="Models\Cores\FoodCore.cs" />
     <Compile Include="Models\Cores\UserCore.cs" />
     <Compile Include="Models\Cores\AspNetUserCore.cs" />
+    <Compile Include="Models\CreateFoodViewModel.cs" />
     <Compile Include="Models\CreateUserModel.cs" />
     <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />

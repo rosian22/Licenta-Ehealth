@@ -1,46 +1,70 @@
 ﻿<link href="~/Content/pages/food.css" rel="stylesheet" />
 
 <div id="food-page-container">
-
+    <div class="page-title">
+        FOOD SUPLIES
+    </div>
     <div class="filter-header">
-        <label>Name</label>
-        <input id="food-filter-name" type="text" placeholder="kiwi, humus, etc." />
-
-        <button class="ui button fluid" data-bind="click: ShowCreateModal">Create Food Item</button>
+        <label class="food-filter-label">Name</label>
+        <div class="ui input food-filter-input">
+            <input type="text" id="food-filter-name" placeholder="kiwi, humus, etc." />
+        </div>
+        <button class="ui button create-food-button" data-bind="click: ShowCreateModal">Create Food Item</button>
     </div>
     <div class="food-container" data-bind="foreach: FoodList">
         <div class="food-item">
             <div class="food-header">
                 <span class="food-name" data-bind="text: Name"></span>
+                <i class="trash icon large delete-icn float-right" data-bind="click: Delete"></i>
             </div>
             <div class="food-picture-container">
                 <img class="food-picture" data-bind="attr:{src: PictureUrl}" />
+                <div class="opacity-field">
+
+                </div>
+                <div class="details-background">
+                    <button class="ui button details-button" data-bind="click: ShowDetailsModal">Details</button>
+                </div>
             </div>
         </div>
     </div>
 
 </div>
-@Html.Partial("~/Views/Food/_CreateFood.cshtml")
+<div id="create-food-container">
+    @Html.Partial("~/Views/Food/_CreateFood.cshtml")
+</div>
+
 @section Scripts{
     <script src="~/Scripts/pages/FoodViewModel.js"></script>
+    <script src="~/Scripts/pages/CreateFoodViewModel.js"></script>
     <script type="text/javascript">
 
         FoodVM = new FoodViewModel();
+        CreateFoodVM = new CreateFoodViewModel();
+
         $(document).ready(function () {
 
-            $('.food-item-modal').modal({
-                blurring: true,
-                useFlex: true
+            $('#create-food-modal').modal({
+                closable: false,
             });
+
             FoodVM.Init();
         });
+
         ko.applyBindings(FoodVM, document.getElementById('food-page-container'));
+        ko.applyBindings(CreateFoodVM, document.getElementById('create-food-container'));
 
         $('#food-filter-name').on('keypress', function (e) {
             if (e.which == 13) {
                 FoodVM.Filter($('#food-filter-name').val());
             }
         });
+
+        function closeCreateModal() {
+            CreateFoodVM.ClearData();
+            $('.upload-style').css('opacity', 1);
+            $('#create-food-modal').modal('hide');
+        }
 
     </script>
 }

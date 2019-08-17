@@ -192,6 +192,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ExercisesController.cs" />
     <Compile Include="Controllers\FoodController.cs" />
     <Compile Include="Controllers\GenericBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -421,6 +422,7 @@
     <Content Include="Scripts\loader.js" />
     <Content Include="Scripts\modal.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\pages\CreateFoodViewModel.js" />
     <Content Include="Scripts\pages\HomeIndexViewModel.js" />
     <Content Include="Scripts\pages\FoodViewModel.js" />
     <Content Include="Scripts\pages\modules\loginModule.js" />
@@ -474,6 +476,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Exercises\" />
     <Folder Include="Views\GenericBase\" />
     <Folder Include="Views\Login\" />
     <Folder Include="Views\User\" />

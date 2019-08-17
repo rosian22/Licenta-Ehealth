@@ -17,8 +17,8 @@ namespace DataLayer.EHealth
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Training()
         {
-            this.Exercises = new HashSet<Exercise>();
             this.Users = new HashSet<User>();
+            this.Exercises = new HashSet<Exercise>();
         }
     
         public System.Guid Id { get; set; }
@@ -26,8 +26,8 @@ namespace DataLayer.EHealth
         public System.DateTime Date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Exercise> Exercises { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Exercise> Exercises { get; set; }
     }
 }

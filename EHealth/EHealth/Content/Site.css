@@ -11,14 +11,6 @@ body {
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
-
 .row-entry {
     float: left;
     clear: left;
@@ -232,8 +224,12 @@ footer {
     cursor: pointer;
 }
 
-.dimmed.dimmable > .ui.animating.dimmer, .dimmed.dimmable > .ui.visible.dimmer, .ui.active.dimmer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.delete-icn{
+    cursor: pointer;
+}
+
+.entry-column {
+    width: 50%;
+    height: 100%;
+    float: left;
 }

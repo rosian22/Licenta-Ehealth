@@ -1,40 +1,81 @@
-﻿<div class="ui modal food-item-modal">
-    <i class="close icon"></i>
-    <div class="header">
-        Create Food Item
-    </div>
-    <div class="image content">
-        <div class="ui transparent input name-container">
-            <input type="text" placeholder="Add Name..." style="border-bottom: 1px solid blue">
-        </div>
+﻿<div id="create-food-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="close icon" onclick="closeCreateModal()"></i>
+                <h5 class="modal-title">Modal title</h5>
+            </div>
 
-        <div class="upload-photo">
+            <div class="modal-body">
+                <div class="entry-column">
+                    <div class="picture-preview-container">
+                        <div class="upload-photo-container">
+                            <img class="uploaded-photo" data-bind="attr:{src: Photo}" onclick="riseClick()" />
+                        </div>
+                        <div class="upload-photo">
+                            <span class="upload-style">Upload Picture</span>
+                            <i class="upload big icon upload-style upload-icon" onclick="riseClick()"></i>
+                            <input style="display: none;" type="file" id="food-item-photo" data-bind="event:{change: PresetPhoto}" />
+                        </div>
+                    </div>
+                </div>
+                <div class="entry-column">
 
+                    <div class="details-part-1">
+                        <div class="ui input food-name">
+                            <input placeholder="Add name..." data-bind="value: Name" />
+                        </div>
+                        <textarea class="food-description" placeholder="Description..." data-bind="value: Description"></textarea>
+                    </div>
 
-        </div>
+                    <div class="details-part-2">
 
-        <div class="input-entry">
-            <label>Description</label>
-            <textarea></textarea>
-        </div>
-        <div class="nutritional-values-container">
-            <label>Carbohidrates</label>
-            <input />
-            <label>Sugar</label>
-            <input />
-            <label>Fats</label>
-            <input />
-            <label>Proteins</label>
-            <input />
-        </div>
-    </div>
-    <div class="actions">
-        <div class="ui black deny button">
-            Cancel
-        </div>
-        <div class="ui positive right labeled icon button">
-            Save
-            <i class="checkmark icon"></i>
+                        <div class="details-2-entry">
+                            <label class="details-entry-label">Carbohydrates</label>
+                            <div class="ui input details-entry-input">
+                                <input data-bind="value: Carbohydrates" />
+                            </div>
+                        </div>
+
+                        <div class="details-2-entry">
+                            <label class="details-entry-label">Sugar</label>
+                            <div class="ui input details-entry-input">
+                                <input data-bind="value: Sugar" />
+                            </div>
+                        </div>
+
+                        <div class="details-2-entry">
+                            <label class="details-entry-label">Fibre</label>
+                            <div class="ui input details-entry-input">
+                                <input data-bind="value: Fibre" />
+                            </div>
+                        </div>
+
+                        <div class="details-2-entry">
+                            <label class="details-entry-label">Proteins</label>
+                            <div class="ui input details-entry-input">
+                                <input data-bind="value: Proteins" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer float-left">
+                <div class="ui black deny button" onclick="closeCreateModal()">
+                    Nope
+                </div>
+                <div class="ui positive right labeled icon button" data-bind="click: Save">
+                    Save
+                    <i class="checkmark icon"></i>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    var riseClick = () => {
+        $('#food-item-photo').click();
+    }
+</script>
