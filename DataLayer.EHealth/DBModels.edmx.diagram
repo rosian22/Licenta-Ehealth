@@ -17,9 +17,9 @@
         <AssociationConnector Association="EHealthModel.UserTrainingAssignment" />
         <AssociationConnector Association="EHealthModel.UserRecipeAssignment" />
         <EntityTypeShape EntityType="EHealthModel.Exercise" Width="1.5" PointX="6" PointY="0.75" />
-        <EntityTypeShape EntityType="EHealthModel.MuscleGroup" Width="1.5" PointX="3.75" PointY="1.375" />
-        <AssociationConnector Association="EHealthModel.FK_Exercise_MuscleGroup" />
         <AssociationConnector Association="EHealthModel.TrainingExerciseAssignment" />
+        <EntityTypeShape EntityType="EHealthModel.MuscleGroup" Width="1.5" PointX="3.75" PointY="1.125" />
+        <AssociationConnector Association="EHealthModel.FK_Exercise_MuscleGroup" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

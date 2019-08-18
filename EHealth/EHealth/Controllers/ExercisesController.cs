@@ -16,10 +16,21 @@ namespace EHealth.Controllers
         // GET: Exercises
         public ActionResult Index()
         {
-            return View();
+            return View("~/Views/Exercises/Index.cshtml");
         }
 
-        public JsonResult Save(ExerciseViewModel model)
+        public JsonResult GetExerciseData(ExerciseViewModel model)
+        {
+            var exercises = ExerciseCore.GetExerciseData(model);
+            if(exercises == null)
+            {
+                return Json(ResponseFactory.ErrorReponse);
+            }
+
+            return Json(ResponseFactory.Success((int)ResponseCode.Success, exercises));
+        }
+
+        public JsonResult Save(CreateExerciseViewModel model)
         {
             var response = ResponseFactory.ErrorReponse;
             if (model.Id == Guid.Empty)
@@ -34,7 +45,7 @@ namespace EHealth.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
-        public Response Update(ExerciseViewModel model)
+        public Response Update(CreateExerciseViewModel model)
         {
 
             if (!ModelState.IsValid)
@@ -42,7 +53,7 @@ namespace EHealth.Controllers
                 return ResponseFactory.ErrorReponse;
             }
 
-            var savedResponse = ExerciseCore.SaveExercises(model);
+            var savedResponse = ExerciseCore.UpdateExercises(model);
             if (savedResponse == null)
             {
                 return ResponseFactory.ErrorReponse;
@@ -51,7 +62,7 @@ namespace EHealth.Controllers
             return ResponseFactory.SuccessResponse;
         }
 
-        public Response Create(ExerciseViewModel model)
+        public Response Create(CreateExerciseViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -78,8 +89,6 @@ namespace EHealth.Controllers
 
             return Json(ResponseFactory.SuccessResponse, JsonRequestBehavior.AllowGet);
         }
-
-
 
     }
 }

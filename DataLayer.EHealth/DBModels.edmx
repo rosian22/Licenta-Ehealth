@@ -50,6 +50,7 @@
           <Property Name="Description" Type="nvarchar" MaxLength="550" Nullable="false" />
           <Property Name="VideoUrl" Type="nvarchar" MaxLength="550" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
         </EntityType>
         <EntityType Name="Food">
           <Key>
@@ -74,6 +75,7 @@
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="MuscleSectionStatus" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Recipe">
           <Key>
@@ -378,14 +380,14 @@
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
           <EntitySet Name="Exercises" EntityType="EHealthModel.Exercise" />
+          <AssociationSet Name="TrainingExerciseAssignment" Association="EHealthModel.TrainingExerciseAssignment">
+            <End Role="Exercise" EntitySet="Exercises" />
+            <End Role="Training" EntitySet="Trainings" />
+          </AssociationSet>
           <EntitySet Name="MuscleGroups" EntityType="EHealthModel.MuscleGroup" />
           <AssociationSet Name="FK_Exercise_MuscleGroup" Association="EHealthModel.FK_Exercise_MuscleGroup">
             <End Role="MuscleGroup" EntitySet="MuscleGroups" />
             <End Role="Exercise" EntitySet="Exercises" />
-          </AssociationSet>
-          <AssociationSet Name="TrainingExerciseAssignment" Association="EHealthModel.TrainingExerciseAssignment">
-            <End Role="Exercise" EntitySet="Exercises" />
-            <End Role="Training" EntitySet="Trainings" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AspNetRole">
@@ -509,15 +511,21 @@
           <Property Name="Description" Type="String" Nullable="false" MaxLength="550" FixedLength="false" Unicode="true" />
           <Property Name="VideoUrl" Type="String" Nullable="false" MaxLength="550" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="MuscleGroup" Relationship="EHealthModel.FK_Exercise_MuscleGroup" FromRole="Exercise" ToRole="MuscleGroup" />
           <NavigationProperty Name="Trainings" Relationship="EHealthModel.TrainingExerciseAssignment" FromRole="Exercise" ToRole="Training" />
+          <NavigationProperty Name="MuscleGroup" Relationship="EHealthModel.FK_Exercise_MuscleGroup" FromRole="Exercise" ToRole="MuscleGroup" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
+        <Association Name="TrainingExerciseAssignment">
+          <End Type="EHealthModel.Exercise" Role="Exercise" Multiplicity="*" />
+          <End Type="EHealthModel.Training" Role="Training" Multiplicity="*" />
+        </Association>
         <EntityType Name="MuscleGroup">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MuscleSectionStatus" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Exercises" Relationship="EHealthModel.FK_Exercise_MuscleGroup" FromRole="MuscleGroup" ToRole="Exercise" />
         </EntityType>
         <Association Name="FK_Exercise_MuscleGroup">
@@ -531,10 +539,6 @@
               <PropertyRef Name="MuscleGroupId" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="TrainingExerciseAssignment">
-          <End Type="EHealthModel.Exercise" Role="Exercise" Multiplicity="*" />
-          <End Type="EHealthModel.Training" Role="Training" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -655,19 +659,12 @@
           <EntitySetMapping Name="Exercises">
             <EntityTypeMapping TypeName="EHealthModel.Exercise">
               <MappingFragment StoreEntitySet="Exercise">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
                 <ScalarProperty Name="MuscleGroupId" ColumnName="MuscleGroupId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MuscleGroups">
-            <EntityTypeMapping TypeName="EHealthModel.MuscleGroup">
-              <MappingFragment StoreEntitySet="MuscleGroup">
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -680,6 +677,15 @@
               <ScalarProperty Name="Id" ColumnName="ExerciseId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="MuscleGroups">
+            <EntityTypeMapping TypeName="EHealthModel.MuscleGroup">
+              <MappingFragment StoreEntitySet="MuscleGroup">
+                <ScalarProperty Name="MuscleSectionStatus" ColumnName="MuscleSectionStatus" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

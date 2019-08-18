@@ -165,6 +165,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\MuscleSectionEnum.cs" />
     <Compile Include="Helpers\AzureHelper.cs" />
     <Compile Include="Models\AuthorizationConstants.cs" />
     <Compile Include="Models\BaseCores\BaseCore.cs" />
@@ -172,11 +173,14 @@
     <Compile Include="Models\BaseCores\BaseSinglePkNameCore.cs" />
     <Compile Include="Models\BaseCores\BaseSinglePkNameStatusCore.cs" />
     <Compile Include="Models\Cores\AspNetRoleCore.cs" />
+    <Compile Include="Models\Cores\ExerciseCore.cs" />
     <Compile Include="Models\Cores\FoodCore.cs" />
     <Compile Include="Models\Cores\UserCore.cs" />
     <Compile Include="Models\Cores\AspNetUserCore.cs" />
+    <Compile Include="Models\ExerciseViewModel.cs" />
     <Compile Include="Models\CreateFoodViewModel.cs" />
     <Compile Include="Models\CreateUserModel.cs" />
+    <Compile Include="Models\CreateExerciseViewModel.cs" />
     <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\RegisterViewModelAdditons.cs" />

@@ -1,0 +1,85 @@
+﻿
+<link href="~/Content/pages/exercise.css" rel="stylesheet" />
+
+<div id="exercise-page-container">
+
+    <div class="exercise-page-header">
+        <label class="header-title">EXERCISES</label>
+        <button class="ui button add-exercise">Add exercise</button>
+        <div class="filter-entry-container">
+            <div class="filter-entry">
+                <label>Name</label>
+                <div class="ui input">
+                    <input placeholder="Name" />
+                </div>
+            </div>
+            <div class="filter-entry">
+                <label>Description</label>
+                <div class="ui input">
+                    <input placeholder="Description" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="muscle-group-tabs">
+        <div class="ui top attached tabular menu muscle-groups">
+            <a class="item active" data-tab="upper-section">Upper Section</a>
+            <a class="item" data-tab="middle-section">Middle Section</a>
+            <a class="item" data-tab="lower-section">Lower Section</a>
+        </div>
+        <div class="ui bottom attached tab segment upper-section active" data-tab="upper-section">
+            <div class="left-side-menu">
+                <span class="menu-items active">Chest</span>
+                <span class="menu-items">Back</span>
+                <span class="menu-items">Shoulders</span>
+                <span class="menu-items">Triceps</span>
+                <span class="menu-items">Biceps</span>
+                <span class="menu-items">Forearms</span>
+                <span class="menu-items">Trapezius</span>
+            </div>
+            @Html.Partial("~/Views/Exercises/_VideoEntry.cshtml")
+        </div>
+        <div class="ui bottom attached tab segment middle-section" data-tab="middle-section">
+            <div class="left-side-menu">
+                <span class="menu-items active">Rectus abdominis</span>
+                <span class="menu-items">Obliquus abdominis</span>
+                <span class="menu-items">Transversus abdominis</span>
+                <span class="menu-items">Erector spinae</span>
+            </div>
+            @Html.Partial("~/Views/Exercises/_VideoEntry.cshtml")
+        </div>
+        <div class="ui bottom attached tab segment lower-section" data-tab="lower-section">
+            <div class="left-side-menu">
+                <span class="menu-items active">Quadriceps</span>
+                <span class="menu-items">Hamstrings</span>
+                <span class="menu-items">Glutes</span>
+            </div>
+            @Html.Partial("~/Views/Exercises/_VideoEntry.cshtml")
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/pages/modules/LeftMenuModule.js"></script>
+    <script src="~/Scripts/pages/CreateExerciseViewModel.js"></script>
+    <script src="~/Scripts/pages/ExerciseViewModel.js"></script>
+    <script type="text/javascript">
+
+        ExerciseVM = new ExerciseViewModel();
+
+        $(document).ready(function () {
+            //$('.muscle-groups .item').tab({
+            //    'onVisible': function (activeTabName) {
+            //        ExerciseVM.Int();
+            //    }
+            //});
+            $('.muscle-groups .item').tab();
+            ExerciseVM.Init();
+        });
+
+        $('.menu-items').on('click', (e) => {
+            leftMenuModule.changeLeftMenu(e, ExerciseVM);
+        });
+
+    </script>
+}

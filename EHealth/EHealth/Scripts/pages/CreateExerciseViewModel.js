@@ -1,4 +1,4 @@
-﻿var CreateExercisesViewModel = function () {
+﻿var CreateExerciseViewModel = function () {
     var self = this;
 
     self.Id = ko.observable();
@@ -98,6 +98,7 @@
         self.PictureUrl(data.PictureUrl);
         self.Description(data.Description);
         self.VideoUrl(data.VideoUrl);
-
     }
 }
+
+var ExerciseVM = null;

@@ -26,9 +26,10 @@ namespace DataLayer.EHealth
         public string Description { get; set; }
         public string VideoUrl { get; set; }
         public int Status { get; set; }
+        public string Name { get; set; }
     
-        public virtual MuscleGroup MuscleGroup { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Training> Trainings { get; set; }
+        public virtual MuscleGroup MuscleGroup { get; set; }
     }
 }

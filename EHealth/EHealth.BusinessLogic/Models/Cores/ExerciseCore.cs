@@ -1,8 +1,10 @@
 ﻿using DataLayer.EHealth;
+using DataLayer.EHealth.Extensions;
 using DataLayer.EHealth.Repositories;
 using EHealth.BusinessLogic.Workflow;
 using EHealth.DataLayer.Models;
 using System;
+using System.Linq.Expressions;
 using System.Web.Http.Results;
 using UpWorky.BusinessLogic.ModelCore.Base;
 
@@ -10,7 +12,23 @@ namespace EHealth.BusinessLogic.Models.Cores
 {
     public class ExerciseCore : BaseSinglePkCore<ExerciseRepository, Exercise>
     {
-        public static Response SaveExercises(ExerciseViewModel model)
+        public static Response GetExerciseData (ExerciseViewModel model)
+        {
+            Expression<Func<Exercise, bool>> expression = t => t.Status == (int)EntityStatus.ACTIVE;
+
+            if (!string.IsNullOrWhiteSpace(model.Name))
+            {
+                expression = expression.AndAlso(t => t.Name.Contains(model.Name));
+            }
+
+            if (!string.IsNullOrWhiteSpace(model.Description))
+            {
+                expression = expression.AndAlso(t => t.Description.Contains(model.Description));
+            }
+
+        }
+
+        public static Response UpdateExercises(CreateExerciseViewModel model)
         {
 
             if (model.Id == Guid.Empty)
@@ -64,7 +82,7 @@ namespace EHealth.BusinessLogic.Models.Cores
             return ResponseFactory.SuccessResponse;
         }
 
-        public static Response CreateExercises(ExerciseViewModel model)
+        public static Response CreateExercises(CreateExerciseViewModel model)
         {
             var tobeCreatedExercise = new Exercise
             {

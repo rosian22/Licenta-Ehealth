@@ -50,10 +50,12 @@
         <div id="side-nav-right" class="sidenav-right right-menu">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav('right')">&times;</a>
             <div class="action-buttons">
-                @Html.ActionLink("Food List", "Index", "Food")
-                @Html.ActionLink("Friend List", "Index", "Home")
-                @Html.ActionLink("Contacts", "Index", "Home")
-                @Html.Partial("_LoginPartial")
+                @Html.ActionLink("Home", "Index", "Home")
+                @Html.ActionLink("Food Suplies", "Index", "Food")
+                @Html.ActionLink("Exercises", "Index", "Exercises")
+                @Html.ActionLink("Meal Plans", "Index", "Home")
+                @Html.ActionLink("Training Schedule", "Index", "Home")
+                @Html.ActionLink("About", "Index", "Home")
             </div>
         </div>
 

@@ -22,6 +22,7 @@ namespace DataLayer.EHealth
     
         public System.Guid Id { get; set; }
         public string Name { get; set; }
+        public int MuscleSectionStatus { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Exercise> Exercises { get; set; }
