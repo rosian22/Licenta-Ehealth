@@ -173,6 +173,7 @@
     <Compile Include="Exercise.cs">
       <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\EFLinqExtension.cs" />
     <Compile Include="Extensions\QuerableExtensions.cs" />
     <Compile Include="Food.cs">
       <DependentUpon>DBModels.tt</DependentUpon>
