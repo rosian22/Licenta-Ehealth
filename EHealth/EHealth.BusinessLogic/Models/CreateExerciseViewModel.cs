@@ -18,5 +18,9 @@ namespace EHealth.BusinessLogic.Models
 
         public string VideoUrl { get; set; }
 
+        public int SectionId { get; set; }
+
+        public string Name { get; set; }
+
     }
 }

@@ -1,0 +1,54 @@
+﻿<link href="~/Content/pages/food.css" rel="stylesheet" />
+<link href="~/Content/pages/meal.css" rel="stylesheet" />
+
+<div class="meal-page-container" id="meal-binding-container">
+
+    <div class="meal-header">
+        <div class="header-title">MEAL PLANS</div>
+        <div class="pagination-actions">
+
+        </div>
+        <button class="ui button add-meal-button" onclick="ShowModal()">Add Meal Plan</button>
+    </div>
+
+    <div class="meal-body-container">
+        <div class="meal-cards-container" data-bind="foreach: Meals">
+            @Html.Partial("~/Views/Meal/_MealCard.cshtml")
+        </div>
+    </div>
+
+
+</div>
+@Html.Partial("~/Views/Meal/_CreateMeal.cshtml")
+
+@section Scripts{
+    <script src="~/Scripts/pages/MealViewModel.js"></script>
+    <script src="~/Scripts/pages/CreateMealViewModel.js"></script>
+    <script type="text/javascript">
+
+        MealVM = new MealViewModel();
+        CreateMealVM = new CreateMealViewModel();
+
+        $(document).ready(function () {
+
+            $('#create-meal-modal').modal({
+                closable: false,
+                blurring: true
+            })
+
+            CreateMealVM.InitDropdown();
+
+            ko.applyBindings(MealVM, document.getElementById('meal-binding-container'));
+            ko.applyBindings(CreateMealVM, document.getElementById('create-meal-modal'));
+        });
+
+        function ShowModal() {
+            $('#create-meal-modal').modal('show');
+        }
+
+        function CloseModal() {
+            $('#create-meal-modal').modal('hide');
+        }
+
+    </script>
+}

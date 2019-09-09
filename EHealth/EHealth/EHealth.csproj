@@ -199,6 +199,7 @@
     <Compile Include="Controllers\JsonResponse.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MealController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -361,6 +362,7 @@
     <Content Include="Content\components\visibility.min.js" />
     <Content Include="Content\components\visit.js" />
     <Content Include="Content\components\visit.min.js" />
+    <Content Include="Content\dropdown.min.css" />
     <Content Include="Content\img\background\awodibu.jpg" />
     <Content Include="Content\img\background\awodibu2.jpg" />
     <Content Include="Content\img\background\josh.jpg" />
@@ -375,6 +377,7 @@
     <Content Include="Content\pages\food.css" />
     <Content Include="Content\pages\homeIndex.css" />
     <Content Include="Content\pages\login.css" />
+    <Content Include="Content\pages\meal.css" />
     <Content Include="Content\popup.css" />
     <Content Include="Content\popup.min.css" />
     <Content Include="Content\progress.css" />
@@ -409,7 +412,9 @@
     <Content Include="Content\themes\basic\assets\fonts\icons.woff" />
     <Content Include="Content\themes\basic\assets\fonts\icons.ttf" />
     <Content Include="Content\themes\basic\assets\fonts\icons.eot" />
+    <Content Include="Scripts\CustomBindings\Ko.SemanticDropdown.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\dropdown.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -426,11 +431,14 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\pages\CreateExerciseViewModel.js" />
     <Content Include="Scripts\pages\CreateFoodViewModel.js" />
+    <Content Include="Scripts\pages\CreateMealViewModel.js" />
     <Content Include="Scripts\pages\ExerciseViewModel.js" />
     <Content Include="Scripts\pages\HomeIndexViewModel.js" />
     <Content Include="Scripts\pages\FoodViewModel.js" />
+    <Content Include="Scripts\pages\MealViewModel.js" />
     <Content Include="Scripts\pages\modules\LeftMenuModule.js" />
     <Content Include="Scripts\pages\modules\loginModule.js" />
+    <Content Include="Scripts\pages\YoutubeVideoViewModel.js" />
     <Content Include="Scripts\popup.js" />
     <Content Include="Scripts\popup.min.js" />
     <Content Include="Scripts\progress.js" />
@@ -480,6 +488,12 @@
     <Content Include="Views\Food\_CreateFood.cshtml" />
     <Content Include="Views\Exercises\Index.cshtml" />
     <Content Include="Views\Exercises\_VideoEntry.cshtml" />
+    <Content Include="Views\Exercises\_CreateExercise.cshtml" />
+    <Content Include="Views\Exercises\_VideoModal.cshtml" />
+    <Content Include="Views\Meal\Index.cshtml" />
+    <Content Include="Views\Meal\_MealCard.cshtml" />
+    <Content Include="Views\Meal\_VideoModal.cshtml" />
+    <Content Include="Views\Meal\_CreateMeal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

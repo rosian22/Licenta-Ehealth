@@ -81,7 +81,9 @@ namespace EHealth.Helpers
                 Id = user.Id,
                 ProfilePictureUrl = user.ProfilePictureUrl,
                 UserType = user.AspNetUser.UserType ?? user.AspNetUser.UserType.Value,
-                FullName = user.FullName
+                FullName = user.FullName,
+                NumberOfMealsPerDay = user.NumberOfMealsPerDay.Value,
+                //NumberOfWorkoutsPerDay = user.NumberOfWorkoutsPerDay ?? user.NumberOfWorkoutsPerDay.Value,
             };
 
             SetIdentity(filterContext, identity, user.AspNetUser);

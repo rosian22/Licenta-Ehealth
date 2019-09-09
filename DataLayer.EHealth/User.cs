@@ -28,6 +28,8 @@ namespace DataLayer.EHealth
         public string FullName { get; set; }
         public string ProfilePictureUrl { get; set; }
         public Nullable<System.DateTime> BirthDay { get; set; }
+        public Nullable<int> NumberOfMealsPerDay { get; set; }
+        public Nullable<int> NumberOfWorkoutsPerDay { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

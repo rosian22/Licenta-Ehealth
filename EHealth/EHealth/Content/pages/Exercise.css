@@ -45,7 +45,7 @@
         margin-left: 20px;
     }
 
-        .exercise-page-header .filter-entry label, .input {
+        .exercise-page-header .filter-entry label, .exercise-page-header .filter-entry .input {
             float: left;
             clear: left;
         }
@@ -70,13 +70,13 @@
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#056e83",GradientType=1);
     }
 
-        .muscle-group-tabs .muscle-groups .item {
-            color: white !important;
-        }
+    .muscle-group-tabs .muscle-groups .item {
+        color: white !important;
+    }
 
-            .muscle-group-tabs .muscle-groups .item.active {
-                color: #0e3e80 !important;
-            }
+        .muscle-group-tabs .muscle-groups .item.active {
+            color: #0e3e80 !important;
+        }
 
     .muscle-group-tabs .left-side-menu {
         float: left;
@@ -104,10 +104,11 @@
 
     .muscle-group-tabs .entity-column {
         float: left;
-        width: 80%;
+        width: 38%;
         height: 100%;
         border-radius: 8px;
         box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.1);
+        margin-left: 20px;
     }
 
         .muscle-group-tabs .entity-column .video-container {
@@ -120,9 +121,9 @@
         }
 
             .muscle-group-tabs .entity-column .video-container .thumbnail-container {
-                float: left;
+                float: left !important;
                 height: 100%;
-                width: 43%;
+                width: 100%;
             }
 
                 .muscle-group-tabs .entity-column .video-container .thumbnail-container .thumbnail-picture {
@@ -144,3 +145,48 @@
                     margin-top: 10px;
                     font-size: 16px;
                 }
+
+@media (max-width: 1200px) {
+
+    .modal-dialog {
+        width: 90% !important;
+        margin: 30px auto;
+    }
+}
+
+.video-url, .section-id, .muscle-group {
+    margin-right: 0px !important;
+    width: 320px !important;
+}
+
+.details-entry-input {
+    margin-right: 0px !important;
+}
+
+.thumbnail-container {
+    float: left !important;
+    height: 260px;
+    width: 353px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.thumbnail-picture {
+    float: left;
+    height: 100%;
+    width: 100%;
+}
+
+.video-container {
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+}
+
+#video-modal .modal-body {
+    height: 700px !important;
+}
+
+#video-modal .modal-title {
+    font-size: 25px !important;
+}

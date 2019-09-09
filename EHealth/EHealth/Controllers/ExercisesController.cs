@@ -22,14 +22,15 @@ namespace EHealth.Controllers
         public JsonResult GetExerciseData(ExerciseViewModel model)
         {
             var exercises = ExerciseCore.GetExerciseData(model);
-            if(exercises == null)
+            if (exercises == null)
             {
                 return Json(ResponseFactory.ErrorReponse);
             }
 
-            return Json(ResponseFactory.Success((int)ResponseCode.Success, exercises));
+            return Json(ResponseFactory.Success((int)ResponseCode.Success, exercises), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult Save(CreateExerciseViewModel model)
         {
             var response = ResponseFactory.ErrorReponse;
@@ -47,12 +48,6 @@ namespace EHealth.Controllers
 
         public Response Update(CreateExerciseViewModel model)
         {
-
-            if (!ModelState.IsValid)
-            {
-                return ResponseFactory.ErrorReponse;
-            }
-
             var savedResponse = ExerciseCore.UpdateExercises(model);
             if (savedResponse == null)
             {
@@ -64,10 +59,10 @@ namespace EHealth.Controllers
 
         public Response Create(CreateExerciseViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return ResponseFactory.ErrorReponse;
-            }
+
+            var file = Request.Files["PictureUrl"];
+            var url = AzureHelper.Upload(file, "PictureUrl", Guid.NewGuid());
+            model.PictureUrl = url;
 
             var creationResponse = ExerciseCore.CreateExercises(model);
             if (creationResponse == null)
@@ -88,6 +83,34 @@ namespace EHealth.Controllers
             }
 
             return Json(ResponseFactory.SuccessResponse, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetFoodDetails(Guid exerciseId)
+        {
+
+            if (exerciseId == Guid.Empty)
+            {
+                return Json(ResponseFactory.ErrorReponse);
+            }
+
+            var exercisesDetails = ExerciseCore.GetExerciseDetails(exerciseId);
+            if (exercisesDetails == null)
+            {
+                return Json(ResponseFactory.ErrorReponse);
+            }
+
+            return Json(ResponseFactory.Success((int)ResponseCode.Success, exercisesDetails), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetMuscleGroups()
+        {
+            var muscleGroups = MuscleGroupCore.GetAll();
+            if(muscleGroups == null)
+            {
+                return Json(ResponseFactory.ErrorReponse);
+            }
+
+            return Json(ResponseFactory.Success((int) ResponseCode.Success, muscleGroups), JsonRequestBehavior.AllowGet);
         }
 
     }

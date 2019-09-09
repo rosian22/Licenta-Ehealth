@@ -1,21 +1,21 @@
-﻿<div id="create-food-modal" class="modal" tabindex="-1" role="dialog">
+﻿<div id="create-exercise-modal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <i class="close icon" onclick="closeCreateModal()"></i>
-                <h5 class="modal-title">Save Food</h5>
+                <h5 class="modal-title">Save Exercise</h5>
             </div>
 
             <div class="modal-body">
                 <div class="entry-column">
                     <div class="picture-preview-container">
                         <div class="upload-photo-container">
-                            <img class="uploaded-photo" data-bind="attr:{src: Photo}" onclick="riseClick()" />
+                            <img class="uploaded-photo" data-bind="attr:{src: PictureUrl}" onclick="riseClick()" />
                         </div>
                         <div class="upload-photo">
                             <span class="upload-style">Upload Picture</span>
                             <i class="upload big icon upload-style upload-icon" onclick="riseClick()"></i>
-                            <input style="display: none;" type="file" id="food-item-photo" data-bind="event:{change: PresetPhoto}" />
+                            <input style="display: none;" type="file" id="exercise-item-photo" data-bind="event:{change: PresetPhoto}" />
                         </div>
                     </div>
                 </div>
@@ -31,30 +31,16 @@
                     <div class="details-part-2">
 
                         <div class="details-2-entry">
-                            <label class="details-entry-label">Carbohydrates</label>
+                            <label class="details-entry-label">Muscle Group</label>
                             <div class="ui input details-entry-input">
-                                <input data-bind="value: Carbohydrates" />
+                                <select class="muscle-group" data-bind="semanticDropdown, options: MuscleGroups, optionsText:'Name', optionsValue:'Id', value: SelectedMuscleGroup"></select>
                             </div>
                         </div>
 
                         <div class="details-2-entry">
-                            <label class="details-entry-label">Sugar</label>
-                            <div class="ui input details-entry-input">
-                                <input data-bind="value: Sugar" />
-                            </div>
-                        </div>
-
-                        <div class="details-2-entry">
-                            <label class="details-entry-label">Fibre</label>
-                            <div class="ui input details-entry-input">
-                                <input data-bind="value: Fibre" />
-                            </div>
-                        </div>
-
-                        <div class="details-2-entry">
-                            <label class="details-entry-label">Proteins</label>
-                            <div class="ui input details-entry-input">
-                                <input data-bind="value: Proteins" />
+                            <label class="details-entry-label">Video Url</label>
+                            <div class="ui input video-url details-entry-input">
+                                <input placeholder="Add video url..." data-bind="value: VideoUrl" />
                             </div>
                         </div>
                     </div>
@@ -76,6 +62,6 @@
 
 <script type="text/javascript">
     var riseClick = () => {
-        $('#food-item-photo').click();
+        $('#exercise-item-photo').click();
     }
 </script>

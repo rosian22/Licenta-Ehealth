@@ -1,0 +1,61 @@
+﻿<div id="create-meal-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="close icon large" onclick="CloseModal()"></i>
+                <h5 class="modal-title">Save Meal</h5>
+            </div>
+
+            <div class="modal-body">
+                <div class="entry-column">
+                    <div class="picture-preview-container">
+                        <div class="upload-photo-container">
+                            <img class="uploaded-photo" data-bind="attr:{src: PictureUrl}" onclick="riseClick()" />
+                        </div>
+                        <div class="upload-photo">
+                            <span class="upload-style">Upload Picture</span>
+                            <i class="upload big icon upload-style upload-icon" onclick="riseClick()"></i>
+                            <input style="display: none;" type="file" id="meal-item-photo" data-bind="event:{change: PresetPhoto}" />
+                        </div>
+                    </div>
+                </div>
+                <div class="entry-column">
+                    <div class="meal-details-container">
+                        <div class="input ui meal-name">
+                            <input placeholder="Name" data-bind="value: Name" />
+                        </div>
+                        <div class="ingredients">
+                            <select multiple="" class="ui dropdown search ingredient-list" data-bind="semanticDropdown, options: Foods, optionsText: 'name', optionsValue: 'value', selectedOptions: SelectedFoods"></select>
+                            <div class="ui input quantity-input">
+                                <input placeholder="Grams" data-bind="value: Quantity" />
+                            </div>
+                            <span class="float-left" style="font-size: 20px; padding: 5px;">g</span>
+                        </div>
+                        <div class="preparation-container">
+                            <label class="instructions-label">Prepartion instructions</label>
+                            <div class="preparation-instruction">
+                                <textarea class="description" data-bind="value: Description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer float-left">
+                <div class="ui black deny button" onclick="CloseModal()">
+                    Nope
+                </div>
+                <div class="ui positive right labeled icon button" data-bind="click: Save">
+                    Save
+                    <i class="checkmark icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var riseClick = () => {
+        $('#meal-item-photo').click();
+    }
+</script>

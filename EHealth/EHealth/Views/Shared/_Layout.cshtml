@@ -18,7 +18,7 @@
 
         <div class="account-icon" onclick="openNav('left')">
             <div class="nav-profile-picture">
-                <img class="user-picture" src="@identity.ProfilePictureUrl" />
+                <img class="user-picture" @*src="@identity.ProfilePictureUrl"*@ />
             </div>
             <div class="menu-trigger">
                 <span class="nav-user-name">@identity.FullName</span>
@@ -31,7 +31,7 @@
             @* ADD HERE ITEMS IN MENU *@
             <div class="profile-details">
                 <div class="profile-picture-container">
-                    <img class="user-picture" src="@identity.ProfilePictureUrl" />
+                    <img class="user-picture" @*src="@identity.ProfilePictureUrl"*@ />
                 </div>
                 <span class="user-name">@identity.FullName</span>
             </div>
@@ -53,7 +53,7 @@
                 @Html.ActionLink("Home", "Index", "Home")
                 @Html.ActionLink("Food Suplies", "Index", "Food")
                 @Html.ActionLink("Exercises", "Index", "Exercises")
-                @Html.ActionLink("Meal Plans", "Index", "Home")
+                @Html.ActionLink("Meal Plans", "Index", "Meal")
                 @Html.ActionLink("Training Schedule", "Index", "Home")
                 @Html.ActionLink("About", "Index", "Home")
             </div>
@@ -99,6 +99,8 @@
     <script src="~/Scripts/loader.js"></script>
     <script src="~/Scripts/ajaxHelper.js"></script>
     <script src="~/Scripts/knockout-3.5.0.js"></script>
+    <script src="~/Scripts/Utils.js"></script>
+    <script src="~/Scripts/CustomBindings/Ko.SemanticDropdown.js"></script>
     @RenderSection("scripts", required: false)
     <script type="text/javascript">
         /* Set the width of the side navigation to 250px */

@@ -1,13 +1,10 @@
-﻿<div class="entity-column">
-    @* DO HERE TO FOREACH BINDING *@
-    <div class="video-container">
-        <div class="thumbnail-container">
-            <img class="thumbnail-picture" />
-        </div>
-        <div class="description-part">
-            <label class="video-title"></label>
-            <div class="description">
-            </div>
+﻿<div class="entity-column video-container" data-bind="attr:{id: Id}">
+    <div class="thumbnail-container" data-bind="click: OpenVideoModal">
+        <img class="thumbnail-picture" data-bind="attr:{src: PictureUrl}" />
+    </div>
+    <div class="description-part">
+        <label class="video-title" data-bind="text: Title"></label>
+        <div class="description" data-bind="text: Description">
         </div>
     </div>
 </div>

@@ -174,9 +174,11 @@
     <Compile Include="Models\BaseCores\BaseSinglePkNameStatusCore.cs" />
     <Compile Include="Models\Cores\AspNetRoleCore.cs" />
     <Compile Include="Models\Cores\ExerciseCore.cs" />
+    <Compile Include="Models\Cores\MuscleGroupCore.cs" />
     <Compile Include="Models\Cores\FoodCore.cs" />
     <Compile Include="Models\Cores\UserCore.cs" />
     <Compile Include="Models\Cores\AspNetUserCore.cs" />
+    <Compile Include="Models\ExercisesReturnedModel.cs" />
     <Compile Include="Models\ExerciseViewModel.cs" />
     <Compile Include="Models\CreateFoodViewModel.cs" />
     <Compile Include="Models\CreateUserModel.cs" />

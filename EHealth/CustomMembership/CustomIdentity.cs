@@ -34,6 +34,10 @@ namespace CustomMembership
 
         public string FullName { get; set; }
 
+        public int NumberOfMealsPerDay { get; set; }
+
+        public int NumberOfWorkoutsPerDay { get; set; }
+
         #endregion
 
     }

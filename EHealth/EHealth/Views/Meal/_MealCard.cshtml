@@ -1,0 +1,11 @@
+﻿<div class="meal-card">
+    <div class="meal-card-body">
+        <div class="meal-card-header" data-bind="text: CounterText()"></div>
+        <div class="meal-picture-container">
+            <img class="meal-picture" data-bind="attr:{src: PictureUrl}"/>
+        </div>
+        <div class="meal-title meal-text" data-bind="text: Name"></div>
+        <div class="meal-calories meal-text" data-bind="test: CaloriesText()"></div>
+    </div>
+    <button class="ui button fluid meal-details-button">More Details</button>
+</div>

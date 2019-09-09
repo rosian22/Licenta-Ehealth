@@ -8,10 +8,10 @@
                 classTextForCurrentTab = $($('.muscle-groups').children()[a]).text();
             }
         }
-
+        classTextForCurrentTab = classTextForCurrentTab.toLowerCase().replace(' ', '-');
+        debugger;
         if (typeof (VM) === 'object') {
-            VM.ActiveSectionGroupPaire[classTextForCurrentTab] = $(e.target).text().toLocaleLowerCase();
-            VM.Init();
+            VM.ActiveSectionGroupPaire()[classTextForCurrentTab] = $(e.target).text().toLocaleLowerCase();
         }
 
         classTextForCurrentTab = classTextForCurrentTab.toLocaleLowerCase();

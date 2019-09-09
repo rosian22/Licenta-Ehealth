@@ -1,27 +1,35 @@
 ﻿
 <link href="~/Content/pages/exercise.css" rel="stylesheet" />
+<link href="~/Content/pages/food.css" rel="stylesheet" />
+
+<style>
+    .modal-dialog {
+        width: 60%;
+        margin: 30px auto;
+    }
+</style>
 
 <div id="exercise-page-container">
 
     <div class="exercise-page-header">
         <label class="header-title">EXERCISES</label>
-        <button class="ui button add-exercise">Add exercise</button>
+        <button class="ui button add-exercise" data-bind="click: ShowCreateModal">Add exercise</button>
         <div class="filter-entry-container">
             <div class="filter-entry">
                 <label>Name</label>
                 <div class="ui input">
-                    <input placeholder="Name" />
+                    <input class="filter-input name-filter" placeholder="Name" data-bind="value: Name, event: {'keydown': OnKeydown}" />
                 </div>
             </div>
             <div class="filter-entry">
                 <label>Description</label>
                 <div class="ui input">
-                    <input placeholder="Description" />
+                    <input class="filter-input description-filter" placeholder="Description" data-bind="value: Description, event: {'keydown': OnKeydown}"  />
                 </div>
             </div>
         </div>
     </div>
-    <div class="muscle-group-tabs">
+    <div class="muscle-group-tabs" id="muscle-group-binding-container">
         <div class="ui top attached tabular menu muscle-groups">
             <a class="item active" data-tab="upper-section">Upper Section</a>
             <a class="item" data-tab="middle-section">Middle Section</a>
@@ -29,57 +37,86 @@
         </div>
         <div class="ui bottom attached tab segment upper-section active" data-tab="upper-section">
             <div class="left-side-menu">
-                <span class="menu-items active">Chest</span>
-                <span class="menu-items">Back</span>
-                <span class="menu-items">Shoulders</span>
-                <span class="menu-items">Triceps</span>
-                <span class="menu-items">Biceps</span>
-                <span class="menu-items">Forearms</span>
-                <span class="menu-items">Trapezius</span>
+                <span class="menu-items active" data-bind="click: FilterExercisesByMuscle">Chest</span>
+                <span class="menu-items" data-bind="click: FilterExercisesByMuscle">Back</span>
+                <span class="menu-items" data-bind="click: FilterExercisesByMuscle">Shoulders</span>
+                <span class="menu-items" data-bind="click: FilterExercisesByMuscle">Triceps</span>
+                <span class="menu-items" data-bind="click: FilterExercisesByMuscle">Biceps</span>
+                <span class="menu-items" data-bind="click: FilterExercisesByMuscle">Forearms</span>
+                <span class="menu-items" data-bind="click: FilterExercisesByMuscle">Trapezius</span>
             </div>
-            @Html.Partial("~/Views/Exercises/_VideoEntry.cshtml")
+            <div class="video-entry-binding-container" data-bind="foreach: UpperExercises">
+                @Html.Partial("~/Views/Exercises/_VideoEntry.cshtml")
+            </div>
         </div>
         <div class="ui bottom attached tab segment middle-section" data-tab="middle-section">
             <div class="left-side-menu">
-                <span class="menu-items active">Rectus abdominis</span>
-                <span class="menu-items">Obliquus abdominis</span>
-                <span class="menu-items">Transversus abdominis</span>
-                <span class="menu-items">Erector spinae</span>
+                <span class="menu-items active" data-bind="click: FilterExercisesByMuscle">Rectus abdominis</span>
+                <span class="menu-items" data-bind="click: FilterExercisesByMuscle">Obliquus abdominis</span>
+                <span class="menu-items" data-bind="click: FilterExercisesByMuscle">Transversus abdominis</span>
+                <span class="menu-items" data-bind="click: FilterExercisesByMuscle">Erector spinae</span>
             </div>
-            @Html.Partial("~/Views/Exercises/_VideoEntry.cshtml")
+            <div class="video-entry-binding-container" data-bind="foreach: MiddleExercises">
+                @Html.Partial("~/Views/Exercises/_VideoEntry.cshtml")
+            </div>
         </div>
         <div class="ui bottom attached tab segment lower-section" data-tab="lower-section">
             <div class="left-side-menu">
-                <span class="menu-items active">Quadriceps</span>
-                <span class="menu-items">Hamstrings</span>
-                <span class="menu-items">Glutes</span>
+                <span class="menu-items active" data-bind="click: FilterExercisesByMuscle">Quadriceps</span>
+                <span class="menu-items" data-bind="click: FilterExercisesByMuscle">Hamstrings</span>
+                <span class="menu-items" data-bind="click: FilterExercisesByMuscle">Glutes</span>
             </div>
-            @Html.Partial("~/Views/Exercises/_VideoEntry.cshtml")
+            <div class="video-entry-binding-container" data-bind="foreach: LowerExercises">
+                @Html.Partial("~/Views/Exercises/_VideoEntry.cshtml")
+            </div>
         </div>
     </div>
 </div>
+<div id="create-exercise-container">
+    @Html.Partial("~/Views/Exercises/_CreateExercise.cshtml")
+</div>
+
+<div id="youtube-video-container">
+    @Html.Partial("~/Views/Exercises/_VideoModal.cshtml")
+</div>
+
 
 @section Scripts{
     <script src="~/Scripts/pages/modules/LeftMenuModule.js"></script>
     <script src="~/Scripts/pages/CreateExerciseViewModel.js"></script>
     <script src="~/Scripts/pages/ExerciseViewModel.js"></script>
+    <script src="~/Scripts/pages/YoutubeVideoViewModel.js"></script>
     <script type="text/javascript">
 
         ExerciseVM = new ExerciseViewModel();
+        CreateExerciseVM = new CreateExerciseViewModel();
+        YtVideoVM = new YoutubeVideoViewModel();
 
         $(document).ready(function () {
-            //$('.muscle-groups .item').tab({
-            //    'onVisible': function (activeTabName) {
-            //        ExerciseVM.Int();
-            //    }
-            //});
+
+            $('#create-exercise-modal').modal({
+                closable: false,
+            });
+
             $('.muscle-groups .item').tab();
+
             ExerciseVM.Init();
+            CreateExerciseVM.InitDropdown();
+
+            ko.applyBindings(ExerciseVM, document.getElementById('exercise-page-container'));
+            ko.applyBindings(CreateExerciseVM, document.getElementById('create-exercise-modal'));
+            ko.applyBindings(YtVideoVM, document.getElementById('youtube-video-container'));
         });
 
         $('.menu-items').on('click', (e) => {
             leftMenuModule.changeLeftMenu(e, ExerciseVM);
         });
+
+        function closeCreateModal() {
+            CreateExerciseVM.ClearData();
+            $('.upload-style').css('opacity', 1);
+            $('#create-exercise-modal').modal('hide');
+        }
 
     </script>
 }
