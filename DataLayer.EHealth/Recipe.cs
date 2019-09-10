@@ -17,16 +17,18 @@ namespace DataLayer.EHealth
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Recipe()
         {
-            this.Foods = new HashSet<Food>();
+            this.RecipeFoodAssignments = new HashSet<RecipeFoodAssignment>();
             this.Users = new HashSet<User>();
         }
     
         public System.Guid Id { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
+        public string PictureUrl { get; set; }
+        public Nullable<double> Calories { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Food> Foods { get; set; }
+        public virtual ICollection<RecipeFoodAssignment> RecipeFoodAssignments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }
     }

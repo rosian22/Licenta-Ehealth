@@ -37,6 +37,7 @@
             })
 
             CreateMealVM.InitDropdown();
+            MealVM.Init();
 
             ko.applyBindings(MealVM, document.getElementById('meal-binding-container'));
             ko.applyBindings(CreateMealVM, document.getElementById('create-meal-modal'));

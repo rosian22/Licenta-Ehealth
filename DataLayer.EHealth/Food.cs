@@ -17,7 +17,7 @@ namespace DataLayer.EHealth
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Food()
         {
-            this.Recipes = new HashSet<Recipe>();
+            this.RecipeFoodAssignments = new HashSet<RecipeFoodAssignment>();
         }
     
         public System.Guid Id { get; set; }
@@ -34,6 +34,6 @@ namespace DataLayer.EHealth
         public Nullable<int> Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Recipe> Recipes { get; set; }
+        public virtual ICollection<RecipeFoodAssignment> RecipeFoodAssignments { get; set; }
     }
 }

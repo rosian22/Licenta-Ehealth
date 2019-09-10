@@ -1,4 +1,5 @@
-﻿using Microsoft.WindowsAzure.Storage;
+﻿using EHealth.BusinessLogic.Models;
+using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,24 @@ namespace EHealth.BusinessLogic.Helpers
             BlockBlob.UploadFromStream(fileStream);
 
             return BlockBlob.Uri.AbsoluteUri;
+        }
+
+        public static Response DeleteFromBlob(Guid fileName)
+        {
+            CloudStorageAccount AzureStorage = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=ehealthlicenta;AccountKey=5KkH5yEILJX9oe4JEBMUDBRTgoC4Za4z5ywqyQ00x7Zvtsuyprat1F6d1ckDqUeuT+5tol4Z6TwdE2TRnJXVMQ==;EndpointSuffix=core.windows.net");
+            CloudBlobClient BlobClient = AzureStorage.CreateCloudBlobClient();
+            CloudBlobContainer Container = BlobClient.GetContainerReference("profilepictures");
+            try
+            {
+                var blobToDelete = Container.GetBlockBlobReference(fileName.ToString());
+                blobToDelete.DeleteIfExists();
+
+                return ResponseFactory.SuccessResponse;
+            }
+            catch (Exception ex)
+            {
+                return ResponseFactory.ErrorReponse;
+            }
         }
     }
 }

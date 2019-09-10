@@ -2,8 +2,36 @@
     var self = this;
 
     self.Meals = ko.observableArray();
+    self.Init = () => {
+        showLoading();
+        ajaxHelper.get(
+            "/Meal/GetMeals",
+            {},
+            (response) => {
+                if (response && response.Success) {
+                    let data = response.Data;
+                    debugger;
+                    let mealArr = [];
 
+                    for (var i = 0; i < data.length; i++) {
+                        mealArr.push(new Meal(i + 1, data[i]));
+                    }
 
+                    self.Meals(mealArr);
+                    hideLoading();
+                    return;
+                }
+
+                hideLoading();
+                showError();
+            },
+            () => {
+                hideLoading();
+                showError();
+            }
+
+        );
+    }
 }
 
 var Meal = function (counter, data) {

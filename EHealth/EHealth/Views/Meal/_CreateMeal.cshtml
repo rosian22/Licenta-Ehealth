@@ -25,7 +25,7 @@
                             <input placeholder="Name" data-bind="value: Name" />
                         </div>
                         <div class="ingredients">
-                            <select multiple="" class="ui dropdown search ingredient-list" data-bind="semanticDropdown, options: Foods, optionsText: 'name', optionsValue: 'value', selectedOptions: SelectedFoods"></select>
+                            <select multiple="" class="ui dropdown search ingredient-list" data-bind="semanticDropdown:{onChange: OnFoodItemAdded}, options: Foods, optionsText: 'name', optionsValue: 'value', selectedOptions: SelectedFoods"></select>
                             <div class="ui input quantity-input">
                                 <input placeholder="Grams" data-bind="value: Quantity" />
                             </div>

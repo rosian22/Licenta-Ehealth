@@ -4,18 +4,17 @@
     self.Id = ko.observable();
     self.PictureUrl = ko.observable();
     self.Name = ko.observable();
-    self.Calories = ko.observable();
     self.Foods = ko.observableArray();
     self.SelectedFoods = ko.observableArray();
     self.Description = ko.observable();
     self.Quantity = ko.observable();
+    self.FoodsWithQuantity = ko.observableArray();
 
 
     self.ClearData = () => {
         self.Id('');
         self.PictureUrl('');
         self.Name('');
-        self.Calories('');
         self.Foods([]);
         self.SelectedFoods([]);
         self.Description('');
@@ -23,18 +22,21 @@
 
     self.Save = () => {
         showLoading();
+
+        var data = new FormData();
+        var foods = [];
+        data.append('Id', self.Id());
+        data.append('PictureUrl', document.getElementById('meal-item-photo').files[0]);
+        data.append('Name', self.Name());
+        data.append('Description', self.Description());
+        data.append('SelectedFoodsJson', JSON.stringify(self.FoodsWithQuantity()));
+        debugger;
         ajaxHelper.postFile(
             "/Meal/Save",
-            {
-                Id: self.Id(),
-                PictureUrl: self.PictureUrl(),
-                Name: self.Name(),
-                Calories: self.Calories(),
-                Foods: self.Foods(),
-                SelectedFoods: self.SelectedFoods(),
-                Description: self.Description(),
-            },
+            data,
             (response) => {
+                debugger;
+
                 if (response && response.Success) {
 
                     hideLoading();
@@ -46,6 +48,7 @@
                 showError();
             },
             () => {
+                debugger;
                 hideLoading();
                 showError();
             }
@@ -69,7 +72,7 @@
     self.MakeSemanticObject = (data) => {
         var returnedObject = [];
         data.forEach(function (item) {
-            var newobj = {}
+            var newobj = {};
             newobj['name'] = item.Name;
             newobj['value'] = item.Id;
             returnedObject.push(newobj);
@@ -96,7 +99,7 @@
                 var semanticObj = self.MakeSemanticObject(data);
                 semanticObj.forEach((item) => {
                     item['quantity'] = self.Quantity();
-                    item['name'] = `${item.name} ${self.Quantity()}(g)`;
+                    item['name'] = `${item.name} ${self.Quantity()} (g)`;
                 });
                 self.Foods(semanticObj);
             },
@@ -106,7 +109,19 @@
         );
     }
 
-
+    self.OnFoodItemAdded = (arr, value, name) => {
+        if (typeof (name) === 'string') {
+            let foodName = name.split(' ');
+            self.FoodsWithQuantity.push({ Id: value, Name: foodName[0], Quantity: foodName[1] });
+        } else if (typeof (name) === 'object') {
+            name = value;
+            let foodName = name.split(' ');
+            var filteredArray = self.FoodsWithQuantity().filter((item) => {
+                return item.Name !== foodName[0];
+            });
+            self.FoodsWithQuantity(filteredArray);
+        }
+    }
 }
 
 var CreateMealVM = null;

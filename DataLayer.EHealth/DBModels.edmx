@@ -84,6 +84,8 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Name" Type="nvarchar" MaxLength="550" />
+          <Property Name="PictureUrl" Type="nvarchar" MaxLength="560" />
+          <Property Name="Calories" Type="float" />
         </EntityType>
         <EntityType Name="RecipeFoodAssignment">
           <Key>
@@ -92,6 +94,7 @@
           </Key>
           <Property Name="RecipeId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="FoodId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Quantity" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Training">
           <Key>
@@ -357,8 +360,6 @@
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AspNetRoles" EntityType="EHealthModel.AspNetRole" />
           <EntitySet Name="AspNetUsers" EntityType="EHealthModel.AspNetUser" />
-          <EntitySet Name="Foods" EntityType="EHealthModel.Food" />
-          <EntitySet Name="Recipes" EntityType="EHealthModel.Recipe" />
           <EntitySet Name="Trainings" EntityType="EHealthModel.Training" />
           <EntitySet Name="Users" EntityType="EHealthModel.User" />
           <AssociationSet Name="FK_User_AspNetUsers" Association="EHealthModel.FK_User_AspNetUsers">
@@ -369,16 +370,8 @@
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <AssociationSet Name="RecipeFoodAssignment" Association="EHealthModel.RecipeFoodAssignment">
-            <End Role="Food" EntitySet="Foods" />
-            <End Role="Recipe" EntitySet="Recipes" />
-          </AssociationSet>
           <AssociationSet Name="UserTrainingAssignment" Association="EHealthModel.UserTrainingAssignment">
             <End Role="Training" EntitySet="Trainings" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="UserRecipeAssignment" Association="EHealthModel.UserRecipeAssignment">
-            <End Role="Recipe" EntitySet="Recipes" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
           <EntitySet Name="Exercises" EntityType="EHealthModel.Exercise" />
@@ -390,6 +383,21 @@
           <AssociationSet Name="FK_Exercise_MuscleGroup" Association="EHealthModel.FK_Exercise_MuscleGroup">
             <End Role="MuscleGroup" EntitySet="MuscleGroups" />
             <End Role="Exercise" EntitySet="Exercises" />
+          </AssociationSet>
+          <EntitySet Name="Foods" EntityType="EHealthModel.Food" />
+          <EntitySet Name="Recipes" EntityType="EHealthModel.Recipe" />
+          <EntitySet Name="RecipeFoodAssignments" EntityType="EHealthModel.RecipeFoodAssignment" />
+          <AssociationSet Name="FK_RecipeFoodAssignment_Food" Association="EHealthModel.FK_RecipeFoodAssignment_Food">
+            <End Role="Food" EntitySet="Foods" />
+            <End Role="RecipeFoodAssignment" EntitySet="RecipeFoodAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecipeFoodAssignment_Recipe" Association="EHealthModel.FK_RecipeFoodAssignment_Recipe">
+            <End Role="Recipe" EntitySet="Recipes" />
+            <End Role="RecipeFoodAssignment" EntitySet="RecipeFoodAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="UserRecipeAssignment" Association="EHealthModel.UserRecipeAssignment">
+            <End Role="Recipe" EntitySet="Recipes" />
+            <End Role="User" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AspNetRole">
@@ -422,34 +430,6 @@
           <NavigationProperty Name="Users" Relationship="EHealthModel.FK_User_AspNetUsers" FromRole="AspNetUser" ToRole="User" />
           <NavigationProperty Name="AspNetRoles" Relationship="EHealthModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
         </EntityType>
-        <EntityType Name="Food">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="550" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Calories" Type="Double" />
-          <Property Name="Carbohidrates" Type="Double" />
-          <Property Name="Sugar" Type="Double" />
-          <Property Name="Fiber" Type="Double" />
-          <Property Name="Fats" Type="Double" />
-          <Property Name="Proteins" Type="Double" />
-          <Property Name="PictureUrl" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
-          <Property Name="Grams" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Recipes" Relationship="EHealthModel.RecipeFoodAssignment" FromRole="Food" ToRole="Recipe" />
-          <Property Name="Status" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Recipe">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Foods" Relationship="EHealthModel.RecipeFoodAssignment" FromRole="Recipe" ToRole="Food" />
-          <NavigationProperty Name="Users" Relationship="EHealthModel.UserRecipeAssignment" FromRole="Recipe" ToRole="User" />
-        </EntityType>
         <EntityType Name="Training">
           <Key>
             <PropertyRef Name="Id" />
@@ -473,9 +453,9 @@
           <Property Name="BirthDay" Type="DateTime" Precision="0" />
           <NavigationProperty Name="AspNetUser" Relationship="EHealthModel.FK_User_AspNetUsers" FromRole="User" ToRole="AspNetUser" />
           <NavigationProperty Name="Trainings" Relationship="EHealthModel.UserTrainingAssignment" FromRole="User" ToRole="Training" />
-          <NavigationProperty Name="Recipes" Relationship="EHealthModel.UserRecipeAssignment" FromRole="User" ToRole="Recipe" />
           <Property Name="NumberOfMealsPerDay" Type="Int32" />
           <Property Name="NumberOfWorkoutsPerDay" Type="Int32" />
+          <NavigationProperty Name="Recipes" Relationship="EHealthModel.UserRecipeAssignment" FromRole="User" ToRole="Recipe" />
         </EntityType>
         <Association Name="FK_User_AspNetUsers">
           <End Type="EHealthModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
@@ -493,16 +473,8 @@
           <End Type="EHealthModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="EHealthModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
-        <Association Name="RecipeFoodAssignment">
-          <End Type="EHealthModel.Food" Role="Food" Multiplicity="*" />
-          <End Type="EHealthModel.Recipe" Role="Recipe" Multiplicity="*" />
-        </Association>
         <Association Name="UserTrainingAssignment">
           <End Type="EHealthModel.Training" Role="Training" Multiplicity="*" />
-          <End Type="EHealthModel.User" Role="User" Multiplicity="*" />
-        </Association>
-        <Association Name="UserRecipeAssignment">
-          <End Type="EHealthModel.Recipe" Role="Recipe" Multiplicity="*" />
           <End Type="EHealthModel.User" Role="User" Multiplicity="*" />
         </Association>
         <EntityType Name="Exercise">
@@ -544,6 +516,75 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Food">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Calories" Type="Double" />
+          <Property Name="Carbohidrates" Type="Double" />
+          <Property Name="Sugar" Type="Double" />
+          <Property Name="Fiber" Type="Double" />
+          <Property Name="Fats" Type="Double" />
+          <Property Name="Proteins" Type="Double" />
+          <Property Name="PictureUrl" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="Grams" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="RecipeFoodAssignments" Relationship="EHealthModel.FK_RecipeFoodAssignment_Food" FromRole="Food" ToRole="RecipeFoodAssignment" />
+        </EntityType>
+        <EntityType Name="Recipe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="PictureUrl" Type="String" MaxLength="560" FixedLength="false" Unicode="true" />
+          <Property Name="Calories" Type="Double" />
+          <NavigationProperty Name="RecipeFoodAssignments" Relationship="EHealthModel.FK_RecipeFoodAssignment_Recipe" FromRole="Recipe" ToRole="RecipeFoodAssignment" />
+          <NavigationProperty Name="Users" Relationship="EHealthModel.UserRecipeAssignment" FromRole="Recipe" ToRole="User" />
+        </EntityType>
+        <EntityType Name="RecipeFoodAssignment">
+          <Key>
+            <PropertyRef Name="RecipeId" />
+            <PropertyRef Name="FoodId" />
+          </Key>
+          <Property Name="RecipeId" Type="Guid" Nullable="false" />
+          <Property Name="FoodId" Type="Guid" Nullable="false" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Food" Relationship="EHealthModel.FK_RecipeFoodAssignment_Food" FromRole="RecipeFoodAssignment" ToRole="Food" />
+          <NavigationProperty Name="Recipe" Relationship="EHealthModel.FK_RecipeFoodAssignment_Recipe" FromRole="RecipeFoodAssignment" ToRole="Recipe" />
+        </EntityType>
+        <Association Name="FK_RecipeFoodAssignment_Food">
+          <End Type="EHealthModel.Food" Role="Food" Multiplicity="1" />
+          <End Type="EHealthModel.RecipeFoodAssignment" Role="RecipeFoodAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Food">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecipeFoodAssignment">
+              <PropertyRef Name="FoodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecipeFoodAssignment_Recipe">
+          <End Type="EHealthModel.Recipe" Role="Recipe" Multiplicity="1" />
+          <End Type="EHealthModel.RecipeFoodAssignment" Role="RecipeFoodAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecipeFoodAssignment">
+              <PropertyRef Name="RecipeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserRecipeAssignment">
+          <End Type="EHealthModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <End Type="EHealthModel.User" Role="User" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -575,33 +616,6 @@
                 <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Foods">
-            <EntityTypeMapping TypeName="EHealthModel.Food">
-              <MappingFragment StoreEntitySet="Food">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Grams" ColumnName="Grams" />
-                <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
-                <ScalarProperty Name="Proteins" ColumnName="Proteins" />
-                <ScalarProperty Name="Fats" ColumnName="Fats" />
-                <ScalarProperty Name="Fiber" ColumnName="Fiber" />
-                <ScalarProperty Name="Sugar" ColumnName="Sugar" />
-                <ScalarProperty Name="Carbohidrates" ColumnName="Carbohidrates" />
-                <ScalarProperty Name="Calories" ColumnName="Calories" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Recipes">
-            <EntityTypeMapping TypeName="EHealthModel.Recipe">
-              <MappingFragment StoreEntitySet="Recipe">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -638,28 +652,12 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="RecipeFoodAssignment" TypeName="EHealthModel.RecipeFoodAssignment" StoreEntitySet="RecipeFoodAssignment">
-            <EndProperty Name="Recipe">
-              <ScalarProperty Name="Id" ColumnName="RecipeId" />
-            </EndProperty>
-            <EndProperty Name="Food">
-              <ScalarProperty Name="Id" ColumnName="FoodId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <AssociationSetMapping Name="UserTrainingAssignment" TypeName="EHealthModel.UserTrainingAssignment" StoreEntitySet="UserTrainingAssignment">
             <EndProperty Name="User">
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
             <EndProperty Name="Training">
               <ScalarProperty Name="Id" ColumnName="TrainingId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="UserRecipeAssignment" TypeName="EHealthModel.UserRecipeAssignment" StoreEntitySet="UserRecipeAssignment">
-            <EndProperty Name="User">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-            <EndProperty Name="Recipe">
-              <ScalarProperty Name="Id" ColumnName="RecipeId" />
             </EndProperty>
           </AssociationSetMapping>
           <EntitySetMapping Name="Exercises">
@@ -692,6 +690,52 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Foods">
+            <EntityTypeMapping TypeName="EHealthModel.Food">
+              <MappingFragment StoreEntitySet="Food">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Grams" ColumnName="Grams" />
+                <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
+                <ScalarProperty Name="Proteins" ColumnName="Proteins" />
+                <ScalarProperty Name="Fats" ColumnName="Fats" />
+                <ScalarProperty Name="Fiber" ColumnName="Fiber" />
+                <ScalarProperty Name="Sugar" ColumnName="Sugar" />
+                <ScalarProperty Name="Carbohidrates" ColumnName="Carbohidrates" />
+                <ScalarProperty Name="Calories" ColumnName="Calories" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recipes">
+            <EntityTypeMapping TypeName="EHealthModel.Recipe">
+              <MappingFragment StoreEntitySet="Recipe">
+                <ScalarProperty Name="Calories" ColumnName="Calories" />
+                <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecipeFoodAssignments">
+            <EntityTypeMapping TypeName="EHealthModel.RecipeFoodAssignment">
+              <MappingFragment StoreEntitySet="RecipeFoodAssignment">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="FoodId" ColumnName="FoodId" />
+                <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UserRecipeAssignment" TypeName="EHealthModel.UserRecipeAssignment" StoreEntitySet="UserRecipeAssignment">
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="Recipe">
+              <ScalarProperty Name="Id" ColumnName="RecipeId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
