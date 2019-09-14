@@ -5,16 +5,15 @@
 
     <div class="user-details">
         <div class="profile-picture-container">
-
+            <img style="width: 100%; height: 100%;" src="@ViewBag.ProfilePicture" />
         </div>
         <div class="details-container">
-            <span class="user-name">Johanna DOE</span>
-            <span class="user-birthday">23/04/1993</span>
+            <span class="user-name">@ViewBag.Name</span>
+            <span class="user-birthday">@ViewBag.BirthDay</span>
             <div class="daily-goal">
                 <label>Daily Goal</label>
                 <div class="ui progress" id="daily-goal-progress-bar">
                     <div class="bar">
-                        <div class="progress"></div>
                     </div>
                 </div>
             </div>
@@ -37,7 +36,7 @@
                 <div class="min-counter">
                     <div class="ui statistic">
                         <div class="value">
-                            0
+                            13
                         </div>
                         <div class="label">
                             MIN
@@ -48,19 +47,16 @@
                     <label class="progress-label">First Part Of The Day</label>
                     <div class="ui active progress progress-bars" id="day-first-part">
                         <div class="bar">
-                            <div class="progress"></div>
                         </div>
                     </div>
                     <label>Second Part Of The Day</label>
                     <div class="ui active progress progress-bars" id="day-second-part">
                         <div class="bar">
-                            <div class="progress"></div>
                         </div>
                     </div>
                     <label>Last Part Of The Day</label>
                     <div class="ui active progress progress-bars" id="day-third-part">
                         <div class="bar">
-                            <div class="progress"></div>
                         </div>
                     </div>
                 </div>
@@ -73,7 +69,7 @@
                 <div class="min-counter">
                     <div class="ui statistic">
                         <div class="value">
-                            0
+                            25
                         </div>
                         <div class="label">
                             MIN
@@ -84,19 +80,16 @@
                     <label class="progress-label">First Part Of The Day</label>
                     <div class="ui active progress progress-bars" id="day-first-part">
                         <div class="bar">
-                            <div class="progress"></div>
                         </div>
                     </div>
                     <label>Second Part Of The Day</label>
                     <div class="ui active progress progress-bars" id="day-second-part">
                         <div class="bar">
-                            <div class="progress"></div>
                         </div>
                     </div>
                     <label>Last Part Of The Day</label>
                     <div class="ui active progress progress-bars" id="day-third-part">
                         <div class="bar">
-                            <div class="progress"></div>
                         </div>
                     </div>
                 </div>
@@ -109,7 +102,7 @@
                 <div class="min-counter">
                     <div class="ui statistic">
                         <div class="value">
-                            0
+                            60
                         </div>
                         <div class="label">
                             MIN
@@ -120,19 +113,16 @@
                     <label class="progress-label">First Part Of The Day</label>
                     <div class="ui active progress progress-bars" id="day-first-part">
                         <div class="bar">
-                            <div class="progress"></div>
                         </div>
                     </div>
                     <label>Second Part Of The Day</label>
                     <div class="ui active progress progress-bars" id="day-second-part">
                         <div class="bar">
-                            <div class="progress"></div>
                         </div>
                     </div>
                     <label>Last Part Of The Day</label>
                     <div class="ui active progress progress-bars" id="day-third-part">
                         <div class="bar">
-                            <div class="progress"></div>
                         </div>
                     </div>
                 </div>
@@ -154,25 +144,25 @@
             <label class="info-label common-text">
                 Body Weight
             </label>
-            <span class="counter common-text">0</span>
+            <span class="counter common-text">92</span>
         </div>
         <div class="calories-burned body-card">
             <label class="info-label common-text">
                 Calories Burned
             </label>
-            <span class="counter common-text">0</span>
+            <span class="counter common-text">200</span>
         </div>
         <div class="goals-achived body-card">
             <label class="info-label common-text">
                 Goals Achieved
             </label>
-            <span class="counter common-text">0</span>
+            <span class="counter common-text">2</span>
         </div>
         <div class="achivements body-card">
             <label class="info-label common-text">
                 Achievements
             </label>
-            <span class="counter common-text">0</span>
+            <span class="counter common-text">8</span>
         </div>
     </div>
 
@@ -189,8 +179,17 @@
 
             HomeIndexVM = new HomeIndexViewModel();
             //HomeIndexVM.Init();
+            var items = $('.progress');
+            var min = 0;
+            var max = 70;
+            for (var i = 0; i < items.length; i++) {
+                var random = Math.floor(Math.random() * (+max - +min)) + +min;
+                $(items[i]).progress({
+                    percent: random
+                });
+            }
 
-            hideLoading();  
+            hideLoading();
         });
 
     </script>

@@ -1,4 +1,5 @@
 ﻿@using CustomMembership
+@using EHealth.BusinessLogic.Models;
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@
 
         <div class="account-icon" onclick="openNav('left')">
             <div class="nav-profile-picture">
-                <img class="user-picture" @*src="@identity.ProfilePictureUrl"*@ />
+                <img class="user-picture" src="@identity.ProfilePictureUrl" />
             </div>
             <div class="menu-trigger">
                 <span class="nav-user-name">@identity.FullName</span>
@@ -31,14 +32,17 @@
             @* ADD HERE ITEMS IN MENU *@
             <div class="profile-details">
                 <div class="profile-picture-container">
-                    <img class="user-picture" @*src="@identity.ProfilePictureUrl"*@ />
+                    <img class="user-picture" src="@identity.ProfilePictureUrl" />
                 </div>
                 <span class="user-name">@identity.FullName</span>
             </div>
             <div class="action-buttons">
-                @Html.ActionLink("User List", "Index", "Home")
-                @Html.ActionLink("Friend List", "Index", "Home")
-                @Html.ActionLink("Contacts", "Index", "Home")
+                @if (identity.UserType == (int)UserType.ADMIN)
+                {
+                    @Html.ActionLink("User List", "Index", "User");
+                }
+                @*@Html.ActionLink("Friend List", "Index", "Home")*@
+                @*@Html.ActionLink("Contacts", "Index", "Home")*@
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -54,7 +58,7 @@
                 @Html.ActionLink("Food Suplies", "Index", "Food")
                 @Html.ActionLink("Exercises", "Index", "Exercises")
                 @Html.ActionLink("Meal Plans", "Index", "Meal")
-                @Html.ActionLink("Training Schedule", "Index", "Home")
+                @*@Html.ActionLink("Training Schedule", "Index", "Home")*@
                 @Html.ActionLink("About", "Index", "Home")
             </div>
         </div>

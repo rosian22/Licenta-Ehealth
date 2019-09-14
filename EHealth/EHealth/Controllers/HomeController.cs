@@ -13,6 +13,13 @@ namespace EHealth.Controllers
     {
         public ActionResult Index()
         {
+            var identiry = GetIdentity();
+
+            ViewBag.ProfilePicture = identiry.ProfilePictureUrl;
+            ViewBag.Name = identiry.FullName;
+            ViewBag.BirthDay = identiry.BirthDay;
+
+
             return View();
         }
 

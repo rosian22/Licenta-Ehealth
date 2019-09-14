@@ -1,11 +1,10 @@
-﻿using EHealth.BusinessLogic.Models;
+﻿using datalayer = DataLayer.EHealth;
+using EHealth.BusinessLogic.Models;
 using EHealth.BusinessLogic.Models.Cores;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
+using System;
 
 namespace EHealth.Controllers
 {
@@ -14,7 +13,22 @@ namespace EHealth.Controllers
         // GET: User
         public ActionResult Index()
         {
-            return View();
+            return View(GetUsers());
+        }
+
+        public IList<datalayer.User> GetUsers()
+        {
+            var navProp = new[] {
+                nameof(datalayer.User.AspNetUser)
+            };
+
+            var users = UserCore.GetListEF(t => t.AspNetUser.UserType != (int)UserType.ADMIN, navProp);
+            if (users == null)
+            {
+                users = new List<datalayer.User>();
+            }
+
+            return users;
         }
 
         public async Task<JsonResult> GetUserData()
@@ -28,6 +42,55 @@ namespace EHealth.Controllers
             }
 
             return Json(ResponseFactory.CreateResponse(true, (int)ResponseCode.Success, model));
+        }
+
+        public JsonResult Deactivate(Guid userId)
+        {
+            if (userId == Guid.Empty)
+            {
+                return Json(ResponseFactory.ErrorReponse);
+            }
+
+            var user = UserCore.Get(userId, new[] { nameof(datalayer.User.AspNetUser) });
+            if (user == null)
+            {
+                return Json(ResponseFactory.ErrorReponse);
+            }
+
+            user.AspNetUser.Status = -1;
+
+            var updatedUser = AspNetUserCore.Update(user.AspNetUser);
+            if (updatedUser == null)
+            {
+                return Json(ResponseFactory.ErrorReponse);
+            }
+
+            return Json(ResponseFactory.SuccessResponse);
+        }
+
+        public JsonResult Activate(Guid userId)
+        {
+            if (userId == Guid.Empty)
+            {
+                return Json(ResponseFactory.ErrorReponse);
+
+            }
+
+            var user = UserCore.Get(userId, new[] { nameof(datalayer.User.AspNetUser) });
+            if (user == null)
+            {
+                return Json(ResponseFactory.ErrorReponse);
+            }
+
+            user.AspNetUser.Status = 0;
+
+            var updatedUser = AspNetUserCore.Update(user.AspNetUser);
+            if (updatedUser == null)
+            {
+                return Json(ResponseFactory.ErrorReponse);
+            }
+
+            return Json(ResponseFactory.SuccessResponse);
         }
 
     }

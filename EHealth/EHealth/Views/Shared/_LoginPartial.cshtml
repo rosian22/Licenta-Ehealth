@@ -9,7 +9,7 @@
     {
         @Html.AntiForgeryToken()
 
-        @Html.ActionLink("Account Settings", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        @*@Html.ActionLink("Account Settings", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
         <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
     }
 }

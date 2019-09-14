@@ -40,6 +40,7 @@ namespace EHealth
                       "~/Content/progress.min.css",
                       "~/Content/message.min.css",
                       "~/Content/modal.min.css",
+                      "~/Content/table.min.css",
                       "~/Content/dropdown.min.css",
                       "~/Content/menu.min.css"));
 

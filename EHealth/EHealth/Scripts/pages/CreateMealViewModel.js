@@ -39,8 +39,11 @@
 
                 if (response && response.Success) {
 
+                    MealVM.Init();
+                    $('#create-meal-modal').modal('hide');
+
                     hideLoading();
-                    showError();
+                    showSuccess();
                     return;
                 }
 

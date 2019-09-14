@@ -83,6 +83,8 @@ namespace EHealth.Helpers
                 UserType = user.AspNetUser.UserType ?? user.AspNetUser.UserType.Value,
                 FullName = user.FullName,
                 NumberOfMealsPerDay = user.NumberOfMealsPerDay.Value,
+                BirthDay = user.BirthDay.HasValue == true ? user.BirthDay.Value.Date.ToString() : "1997/02/07",
+
                 //NumberOfWorkoutsPerDay = user.NumberOfWorkoutsPerDay ?? user.NumberOfWorkoutsPerDay.Value,
             };
 

@@ -41,7 +41,7 @@ namespace EHealth.BusinessLogic.Models.Cores
                             return ResponseFactory.ErrorReponse;
                         }
 
-                        caloriValue = caloriValue + (item.Quantity * food.Calories) / food.Grams;
+                        caloriValue = (caloriValue + (item.Quantity * food.Calories) / food.Grams) * 100;
 
                         var foodItems = new RecipeFoodAssignment
                         {

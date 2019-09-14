@@ -38,6 +38,8 @@ namespace CustomMembership
 
         public int NumberOfWorkoutsPerDay { get; set; }
 
+        public string BirthDay { get; set; }
+
         #endregion
 
     }

@@ -1,0 +1,131 @@
+﻿@using EHealth.DataLayer.Models
+@model IList<DataLayer.EHealth.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .body-content {
+        background-color: #2B2B2B;
+    }
+</style>
+<h2 style="margin-left: 20px; color: white">Users</h2>
+<div style="padding: 20px;">
+    <table class="ui inverted table users-table">
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                BirthDay
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                MealsPerDay
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img style="height: 100px; width: 100px;" src="@item.ProfilePictureUrl" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BirthDay)
+                </td>
+                @if (item.AspNetUser.Status == (int)EntityStatus.ACTIVE)
+                {
+                    <td style="background-color: #306e30">
+                        <i class="icon checkmark"></i><span>Active</span>
+                    </td>
+                }
+                else
+                {
+                    <td style="background-color: #b11f1f">
+                        <i class="icon close float-left"></i><span>Deactivated</span>
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfMealsPerDay)
+                </td>
+                <td>
+                    <button class="ui button" style="background-color: #3C46CF !important; color: white; margin-top: 20px; margin-right: 20px;" onclick="activate('@item.Id')">Activate</button>
+                    <button class="ui button" style="background-color: #3C46CF !important; color: white; margin-top: 20px; margin-right: 20px;" onclick="deactivate('@item.Id')">Deactivate</button>
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        var deactivate = function (id) {
+            showLoading()
+            ajaxHelper.post(
+                '/User/Deactivate',
+                {
+                    userId: id
+                },
+                function (response) {
+                    if (response && response.Success) {
+                        location.reload();
+                        hideLoading();
+                        showSuccess();
+                    }
+                    else {
+                        hideLoading();
+                        showError();
+                    }
+                },
+                function () {
+                    hideLoading();
+                    showError();
+                }
+            )
+        }
+
+        var activate = function (id) {
+            showLoading()
+            ajaxHelper.post(
+                '/User/Activate',
+                {
+                    userId: id
+                },
+                function (response) {
+                    if (response && response.Success) {
+                        location.reload();
+                        hideLoading();
+                        showSuccess();
+                    }
+                    else {
+                        hideLoading();
+                        showError();
+                    }
+                },
+                function () {
+                    hideLoading();
+                    showError();
+                }
+            )
+        }
+        $(document).ready(function () {
+
+        });
+    </script>
+}
